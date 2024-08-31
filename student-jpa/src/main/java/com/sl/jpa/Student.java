@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "students")
@@ -14,13 +15,19 @@ public class Student {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@Column(name = "name")
 	private String name;
 
 	@Column(name = "age")
-	private Integer age;
+	private int age;
+
+	@Column(name = "grade")
+	private int grade;
+
+	@Transient
+	private boolean pedidoAtencao;
 
 	public Student() {
 	}
@@ -30,11 +37,11 @@ public class Student {
 		this.age = age;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -46,12 +53,28 @@ public class Student {
 		this.name = name;
 	}
 
-	public Integer getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(Integer age) {
+	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public boolean isPedidoAtencao() {
+		return pedidoAtencao;
+	}
+
+	public void setPedidoAtencao(boolean pedidoAtencao) {
+		this.pedidoAtencao = pedidoAtencao;
 	}
 
 }
