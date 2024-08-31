@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -120,6 +121,39 @@ public class App {
 			logger.info("{}) Named Query - Pessoa - {}", ct++, it.next());
 		}
 		logger.info("======================================================");
+		
+		logger.info("======================================================");
+		TypedQuery<Person> typedQuery = entityManager.createNamedQuery("person.getAll", Person.class);
+		List pp1 = typedQuery.getResultList(); 
+		ct = 1;
+		it = pp1.stream().iterator();
+		while (it.hasNext()) {
+			logger.info("{}) Typed Query - Pessoa - {}", ct++, it.next());
+		}
+
+ 		logger.info("======================================================");
+		entityManager.getTransaction().begin();
+        TypedQuery<Person> queryById = entityManager.createNamedQuery("person.getPersonById", Person.class);
+		queryById.setParameter("id", 1);
+		List byId = queryById.getResultList(); 
+		entityManager.getTransaction().commit();
+		ct = 1;
+		it = byId.stream().iterator();
+		while (it.hasNext()) {
+			logger.info("{}) Named Query by Id - Pessoa - {}", ct++, it.next());
+		}
+
+ 		logger.info("======================================================");
+		//entityManager.getTransaction().begin();
+        TypedQuery<Person> queryByName = entityManager.createNamedQuery("person.getPersonByName", Person.class);
+ 		queryByName.setParameter("name", "Silvio");
+		List byName = queryByName.getResultList(); 
+		//entityManager.getTransaction().commit();
+		ct = 1;
+		it = byName.stream().iterator();
+		while (it.hasNext()) {
+			logger.info("{}) Named Query by Name - Pessoa - {}", ct++, it.next());
+		}
 		
 		entityManager.close();
 		factory.close();
