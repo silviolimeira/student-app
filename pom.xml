@@ -9,6 +9,7 @@
   	<module>student-utils</module>
   	<module>student-query</module>
   	<module>student-jpa</module>
+  	<module>student-inheritance</module>
   </modules>
   <build>
     <plugins>
