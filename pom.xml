@@ -8,6 +8,7 @@
   	<module>student-ui</module>
   	<module>student-utils</module>
   	<module>student-query</module>
+  	<module>student-jpa</module>
   </modules>
   <build>
     <plugins>
@@ -33,4 +34,11 @@
       </plugin>
     </plugins>
   </build>  
+	<repositories>
+	  <repository>
+	    <id>central</id>
+	    <name>Maven Central</name>
+	    <url>https://repo.maven.apache.org/maven2</url>
+	  </repository>
+	</repositories>  
 </project>
