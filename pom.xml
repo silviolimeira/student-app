@@ -10,6 +10,7 @@
   	<module>student-query</module>
   	<module>student-jpa</module>
   	<module>student-inheritance</module>
+  	<module>student-one-to-one</module>
   </modules>
   <build>
     <plugins>
