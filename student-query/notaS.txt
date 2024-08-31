@@ -1,0 +1,33 @@
+Install MySQL from zip file
+ref: https://www.youtube.com/watch?v=2aq3rP694ys
+https://www.youtube.com/watch?v=ST_d_2Qh-zQ&list=PLSwH4ViBDl2SvI0vpBZqCi7qcWWnH4r1Z
+
+
+Extract the zip
+Create the folder data
+
+bin/mysqld --initialize
+
+bin/mysqld --initialize-secure 
+
+bin/mysqld --console 
+
+Find temporary password, .err file in the data folder.
+
+EwvB=ZI)k7k#
+
+mysql -h localhost -u root -pEwvB=ZI)k7k#
+Change the root password:
+  ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+  
+  
+CREATE DATABASE udemy;
+CREATE TABLE students (
+    id int NOT NULL PRIMARY KEY,
+    name varchar(255) NOT NULL,
+    age int
+);
+
+INSERT INTO udemy.students
+(id, name, age)
+VALUES(1, 'Silvio Cesar', 50);
