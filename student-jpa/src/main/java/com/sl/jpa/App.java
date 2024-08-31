@@ -111,6 +111,16 @@ public class App {
 			logger.info("{}) Native Query - Pessoa < {} - {}", ct++, 50, it.next());
 		}
 
+		logger.info("======================================================");
+		Query query = entityManager.createNamedQuery("person.getAll");
+		List<Person> pp = query.getResultList(); 
+		ct = 1;
+		it = pp.stream().iterator();
+		while (it.hasNext()) {
+			logger.info("{}) Named Query - Pessoa - {}", ct++, it.next());
+		}
+		logger.info("======================================================");
+		
 		entityManager.close();
 		factory.close();
 		

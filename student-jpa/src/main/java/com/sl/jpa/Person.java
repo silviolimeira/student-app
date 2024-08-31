@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERSON_NAME")
+@NamedQuery(name = "person.getAll", query="SELECT p FROM Person p")
 public class Person {
 
 	@Id
