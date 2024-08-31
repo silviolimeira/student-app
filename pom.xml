@@ -11,6 +11,7 @@
   	<module>student-jpa</module>
   	<module>student-inheritance</module>
   	<module>student-one-to-one</module>
+  	<module>student-many-to-one</module>
   </modules>
   <build>
     <plugins>
