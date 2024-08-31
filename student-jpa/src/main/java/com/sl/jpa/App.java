@@ -49,7 +49,15 @@ public class App {
 		return (T) query.getResultList(); 
 	}
 	
-
+	// Native Query
+	public static <T> T findWhereMinorNative(EntityManager em, int age) {
+		// TODO 29.Java Persistence Query Language (JPQL) 4:36 / 8:35
+		Query query = em.createNativeQuery("SELECT * FROM PERSON_NAME P WHERE P.AGE < ?1 ORDER BY P.NAME ASC");
+		query.setParameter(1, age);
+		return (T) query.getResultList(); 
+	}
+	
+	
 	public static void remove(int id, EntityManager em) {
 		em.getTransaction().begin();
 		Object entity = find(id, em);
@@ -96,6 +104,12 @@ public class App {
 			logger.info("{}) Pessoa < {} - {}", ct++, 50, it.next());
 		}
 		
+		menoresQue50 = findWhereMinorNative(entityManager, 50);
+		ct = 1;
+		it = menoresQue50.stream().iterator();
+		while (it.hasNext()) {
+			logger.info("{}) Native Query - Pessoa < {} - {}", ct++, 50, it.next());
+		}
 
 		entityManager.close();
 		factory.close();
