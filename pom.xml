@@ -13,6 +13,7 @@
   	<module>student-one-to-one</module>
   	<module>student-many-to-one</module>
   	<module>student-many-to-many</module>
+  	<module>student-listeners</module>
   </modules>
   <build>
     <plugins>
