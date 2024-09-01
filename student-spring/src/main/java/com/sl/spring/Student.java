@@ -3,6 +3,7 @@ package com.sl.spring;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 public class Student {
@@ -10,6 +11,7 @@ public class Student {
 	
 	// composition
 	@Autowired
+	@Qualifier(value="second_address")
 	private Address address;
 	
 	String studentName;

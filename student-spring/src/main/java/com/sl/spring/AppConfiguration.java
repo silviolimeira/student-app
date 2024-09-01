@@ -13,8 +13,13 @@ public class AppConfiguration {
 		return new Student();
 	}
 	
-	@Bean(name="address_bean")
-	public Address getAddress() {
-		return new Address();
+	@Bean(name="first_address")
+	public Address getAddress1() {
+		return new Address("First Address");
+	}
+	
+	@Bean(name="second_address")
+	public Address getAddress2() {
+		return new Address("Second Address");
 	}
 }
