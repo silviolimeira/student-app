@@ -6,6 +6,8 @@
 
     <!-- bean definitions here -->
 	<!-- <bean id="student_bean" class="com.sl.spring.Student" scope="singleton"></bean> -->
-	<bean id="student_bean" class="com.sl.spring.Student" scope="prototype"></bean>
+	<bean id="student_bean" class="com.sl.spring.Student" scope="singleton" init-method="initStudent" destroy-method="destroyStudent">
+		<property name="studentName" value="Apollo"></property>
+	</bean>
 	
 </beans>

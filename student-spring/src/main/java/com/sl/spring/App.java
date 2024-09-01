@@ -3,6 +3,7 @@ package com.sl.spring;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
@@ -19,6 +20,8 @@ public class App {
 		
 		Student s2 = (Student) context.getBean("student_bean");
 		logger.info(s2.getStudentName());
+		
+		((ConfigurableApplicationContext) context).close();
 		
 	}
 }

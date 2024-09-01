@@ -16,8 +16,17 @@ public class Student {
 		this.studentName = studentName;
 	}
 
-
 	public void sayHello() {
 		logger.info("Hello World from Spring Framework...");
 	}
+	
+	public void initStudent() {
+		logger.info("This is the init() method...");
+	}
+	
+	// this is not called when the scope="prototype"
+	public void destroyStudent() {
+		logger.info("This is the destroy() method ...");
+	}
+	
 }
