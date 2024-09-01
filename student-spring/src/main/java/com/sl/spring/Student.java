@@ -2,14 +2,18 @@ package com.sl.spring;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Student {
 	private static final Logger logger = LogManager.getLogger(Student.class);
 	
 	// composition
+	@Autowired
 	private Address address;
 	
 	String studentName;
+	
+	public Student() { }
 	
 	public Student(Address address) {
 		this.address = address;
