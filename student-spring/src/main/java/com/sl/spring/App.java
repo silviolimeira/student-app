@@ -16,10 +16,7 @@ public class App {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		Student s = (Student) context.getBean("student_bean");
 		s.setStudentName("Kevin");
-		logger.info(s.getStudentName());
-		
-		Student s2 = (Student) context.getBean("student_bean");
-		logger.info(s2.getStudentName());
+		logger.info(s.showInfo());
 		
 		((ConfigurableApplicationContext) context).close();
 		

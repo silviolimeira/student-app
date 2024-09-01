@@ -6,7 +6,14 @@ import org.apache.logging.log4j.Logger;
 public class Student {
 	private static final Logger logger = LogManager.getLogger(Student.class);
 	
+	// composition
+	private Address address;
+	
 	String studentName;
+	
+	public Student(Address address) {
+		this.address = address;
+	}
 	
 	public String getStudentName() {
 		return studentName;
@@ -16,17 +23,19 @@ public class Student {
 		this.studentName = studentName;
 	}
 
-	public void sayHello() {
-		logger.info("Hello World from Spring Framework...");
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
-	public void initStudent() {
-		logger.info("This is the init() method...");
+	public String showInfo() {
+		return "Address is: " + address.toString();
 	}
 	
-	// this is not called when the scope="prototype"
-	public void destroyStudent() {
-		logger.info("This is the destroy() method ...");
-	}
+	
+
 	
 }

@@ -6,8 +6,13 @@
 
     <!-- bean definitions here -->
 	<!-- <bean id="student_bean" class="com.sl.spring.Student" scope="singleton"></bean> -->
-	<bean id="student_bean" class="com.sl.spring.Student" scope="singleton" init-method="initStudent" destroy-method="destroyStudent">
-		<property name="studentName" value="Apollo"></property>
+	<bean id="student_bean" class="com.sl.spring.Student" scope="singleton">
+		<!-- <property name="studentName" value="Apollo"></property> -->
+		<constructor-arg ref="address_bean"></constructor-arg>
 	</bean>
+	<bean id="address_bean" class="com.sl.spring.Address">
+		<property name="address" value="Wall Street 12"></property>
+	</bean>
+	
 	
 </beans>
