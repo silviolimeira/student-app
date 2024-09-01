@@ -14,6 +14,11 @@ public class App {
 		// IoC container - this is where the beans are location
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		Student s = (Student) context.getBean("student_bean");
-		s.sayHello();
+		s.setStudentName("Kevin");
+		logger.info(s.getStudentName());
+		
+		Student s2 = (Student) context.getBean("student_bean");
+		logger.info(s2.getStudentName());
+		
 	}
 }

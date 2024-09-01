@@ -5,5 +5,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-	<bean id="student_bean" class="com.sl.spring.Student"></bean>
+	<!-- <bean id="student_bean" class="com.sl.spring.Student" scope="singleton"></bean> -->
+	<bean id="student_bean" class="com.sl.spring.Student" scope="prototype"></bean>
+	
 </beans>
