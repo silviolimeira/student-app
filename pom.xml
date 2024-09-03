@@ -15,6 +15,7 @@
   	<module>student-many-to-many</module>
   	<module>student-listeners</module>
   	<module>student-spring</module>
+  	<module>spring-1</module>
   </modules>
   <build>
     <plugins>
