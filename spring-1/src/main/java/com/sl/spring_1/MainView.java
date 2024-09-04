@@ -11,6 +11,9 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.Route;
 
 @Route("/ui")
@@ -28,13 +31,33 @@ public class MainView extends VerticalLayout{
 		// we can use HTML and CSS related code to customize
 		span.getElement().getStyle().set("font-size", "23px");
 		span.getElement().getStyle().set("font-weight", "bold");
-		add(span);
 		
-		Button button = new Button("Click me!", event -> {
+		
+		TextField nameField = new TextField("Name: ");
+		nameField.setMinLength(3);
+		nameField.setMaxLength(10);
+		nameField.addValueChangeListener(event -> {
+			logger.info("Value has been changed ...");
+		});
+		Person person = new Person();
+		Binder<Person> binder = new Binder<>(Person.class);
+		binder.bind(nameField, Person::getName, Person::setName);
+		
+		Button button = new Button("Save", event -> {
+			try {
+				binder.writeBean(person);
+			} catch (ValidationException e) {
+				logger.error(e);
+			}
 			logger.info("Button was been clicked...");
 			Span span1 = new Span(new Date().toString());
 			add(span1);
+			Span span2 = new Span(person.toString());
+			add(span2);
 		});
+		
+		add(span);
+		add(nameField);
 		add(button);
 	}
 }
