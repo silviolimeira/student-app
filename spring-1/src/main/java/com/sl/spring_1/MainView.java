@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.checkbox.CheckboxGroup;
+import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -24,6 +27,27 @@ public class MainView extends VerticalLayout{
 	private static final Logger logger = LogManager.getLogger(MyController.class);
 
 	public MainView() {
+		CheckboxGroup<String> group = new CheckboxGroup<>();
+		group.setLabel("Days");
+		group.setItems("Monday", "Tuesday", "Wednesday");
+		group.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
+		group.addValueChangeListener(event -> {
+			logger.info(group.getValue());
+		});
+		add(group);
+	}
+	
+	
+	public void MainView4() {
+		Checkbox check = new Checkbox();
+		check.setLabel("I agree terms");
+		check.addValueChangeListener(event -> {
+			logger.info(check.getValue());
+		});
+		add(check);
+	}
+	
+	public void MainView3() {
 		TextArea textArea = new TextArea();
 		textArea.setLabel("Description");
 		textArea.setValue("This is going to be a very long text just for demonstration purpose...");
