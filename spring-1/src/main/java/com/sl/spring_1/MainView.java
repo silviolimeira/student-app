@@ -11,9 +11,11 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 @Route("/ui")
@@ -22,6 +24,21 @@ public class MainView extends VerticalLayout{
 	private static final Logger logger = LogManager.getLogger(MyController.class);
 
 	public MainView() {
+		TextArea textArea = new TextArea();
+		textArea.setLabel("Description");
+		textArea.setValue("This is going to be a very long text just for demonstration purpose...");
+		textArea.setHeight("200px");
+		textArea.setWidth("200px");
+		textArea.setMaxLength(10);
+		textArea.setValueChangeMode(ValueChangeMode.EAGER);
+		textArea.addValueChangeListener(event -> {
+			logger.info("Something has been changed");
+		});
+		add(textArea);
+		
+	}
+	
+	public void MainView2() {
 		add(new Label("Hello World from Vaddi and Spring Boot..."));
 		add(new Text("This is a text in Vaadin..."));
 		add(new Text("This is a another text in Vaadin..."));
