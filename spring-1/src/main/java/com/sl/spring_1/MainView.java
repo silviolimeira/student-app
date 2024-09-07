@@ -14,6 +14,8 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -30,6 +32,30 @@ public class MainView extends VerticalLayout{
 	private static final Logger logger = LogManager.getLogger(MyController.class);
 
 	public MainView() {
+		
+		List<Person> employees = new ArrayList<>();
+		employees.add(new Person("Adam", "adam@gmail.com", 35));
+		employees.add(new Person("Ana", "ana@gmail.com", 18));
+		employees.add(new Person("Kevin", "kevin@gmail.com", 20));
+		employees.add(new Person("Steven", "steven@gmail.com", 24));
+		employees.add(new Person("Daniel", "daniel@gmail.com", 28));
+		employees.add(new Person("Michael", "michael@gmail.com", 50));
+		
+		Grid<Person> grid = new Grid<>(Person.class, false);
+		grid.addColumn(Person::getName).setHeader("Name").setTextAlign(ColumnTextAlign.CENTER);
+		grid.addColumn(Person::getEmail).setHeader("Email").setTextAlign(ColumnTextAlign.CENTER);
+		grid.addColumn(Person::getAge).setHeader("Age").setTextAlign(ColumnTextAlign.CENTER);
+		
+		grid.setAllRowsVisible(true);
+		
+		grid.setItems(employees);
+		add(grid);
+		
+		
+		
+	}
+	
+	public void MainView6() {
 		
 		List<Person> list = new ArrayList<>();
 		list.add(new Person("Adam", 33));
