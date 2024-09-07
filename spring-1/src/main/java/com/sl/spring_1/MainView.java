@@ -2,12 +2,17 @@ package com.sl.spring_1;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.sl.spring_1.component.menu.ButtonMenuComponent;
+import com.sl.spring_1.component.menu.FunctionOptionMenu;
+import com.sl.spring_1.component.menu.MenuComponent;
+import com.sl.spring_1.component.menu.ObjectMenuComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
@@ -36,8 +41,20 @@ import com.vaadin.flow.router.Route;
 public class MainView extends VerticalLayout{
 
 	private static final Logger logger = LogManager.getLogger(MyController.class);
-
+	
 	public MainView() {
+ 		MenuComponent mc1 = new MenuComponent("50%", "100%");
+ 		mc1.createOptions(
+ 				Arrays.asList(
+ 						FunctionOptionMenu.castroFornecedores(),
+ 						FunctionOptionMenu.cadastroClientes(), 
+ 						FunctionOptionMenu.cadastroClientes(), 
+ 						FunctionOptionMenu.filtro()));
+		add(mc1);
+	}
+	
+	public void MainView8 () {
+		
 		Tab tab1 = new Tab(VaadinIcon.BELL.create(), new Span("Orders")); 
 		Tab tab2 = new Tab(VaadinIcon.COG.create(), new Span("Payments")); 
 		Tab tab3 = new Tab(VaadinIcon.USER.create(), new Span("Services"));
