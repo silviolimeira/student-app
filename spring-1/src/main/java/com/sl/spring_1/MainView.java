@@ -1,7 +1,9 @@
 package com.sl.spring_1;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,6 +13,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -27,6 +30,27 @@ public class MainView extends VerticalLayout{
 	private static final Logger logger = LogManager.getLogger(MyController.class);
 
 	public MainView() {
+		
+		List<Person> list = new ArrayList<>();
+		list.add(new Person("Adam", 33));
+		list.add(new Person("Ana", 26));
+		list.add(new Person("Kevin", 14));
+		list.add(new Person("Steven", 10));
+		
+		ComboBox<Person> box = new ComboBox<>("Employee");
+		box.setItems(list);
+		
+		box.setPlaceholder("Select an employee");
+		box.setItemLabelGenerator(person -> person.getName() + " / " + person.getAge());
+		
+		box.addValueChangeListener(event -> {
+			logger.info(box.getValue());
+		});
+		
+		add(box);
+	}
+	
+	public void MainView5() {
 		CheckboxGroup<String> group = new CheckboxGroup<>();
 		group.setLabel("Days");
 		group.setItems("Monday", "Tuesday", "Wednesday");
@@ -80,7 +104,7 @@ public class MainView extends VerticalLayout{
 		nameField.addValueChangeListener(event -> {
 			logger.info("Value has been changed ...");
 		});
-		Person person = new Person();
+		Person person = new Person("John", 23);
 		Binder<Person> binder = new Binder<>(Person.class);
 		binder.bind(nameField, Person::getName, Person::setName);
 		
