@@ -6,7 +6,7 @@ import org.checkerframework.common.returnsreceiver.qual.This;
 
 import com.sl.spring_1.MyController;
 
-public class FunctionOptionMenu {
+public class MenuCommand {
 
 	private static final Logger logger = LogManager.getLogger(MyController.class);
 
@@ -21,8 +21,19 @@ public class FunctionOptionMenu {
 		};
 	}
 	
+	public static ObjectMenuComponent cadastroFornecedores() {
+		return new ButtonMenuComponent("Fornecedores", "100px", "150px") {
+			
+			@Override
+			public boolean execute() {
+				logger.info("execute Cadastro Fornecedores");
+				return false;
+			}
+		};
+	}
+	
 	public static ObjectMenuComponent castroFornecedores() {
-		return new SpanMenuComponent("Cadastro Fornecedores") {
+		return new SpanMenuComponent("Fornecedores") {
 			@Override
 			public boolean execute() {
 				logger.info("execute Cadastro de Fonecedores");

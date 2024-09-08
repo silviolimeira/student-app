@@ -21,27 +21,44 @@ public class MenuComponent extends VerticalLayout {
 	
 	String width;
 	String height;
+	String header;
+	int colunas;
 
 	public void createOptions(List<ObjectMenuComponent> menus) {
+		if (!this.header.isEmpty()) {
+			Span header = new Span(this.header);
+			add(header);
+		}
+		HorizontalLayout opcoes = new HorizontalLayout();
+		int c = 0;
 		for (ObjectMenuComponent o : menus) {
+			c++;
+			if (c > colunas) {
+				add(opcoes);
+				opcoes = new HorizontalLayout();
+				c = 0;
+			}
 			if (o.getOption().getClass().equals(Button.class)) {
 				String str = String.format("%d%s", (100 / menus.size()), "%");
 				//((HasSize) o.getOption()).setHeight(str);
-				add((Button) o.getOption());
+				opcoes.add((Button) o.getOption());
 			} else if (o.getOption().getClass().equals(Span.class)) {
-				add((Span) o.getOption());
+				opcoes.add((Span) o.getOption());
 			} else if (o.getOption().getClass().equals(Checkbox.class)) {
-				add((Checkbox) o.getOption());
+				opcoes.add((Checkbox) o.getOption());
 			}
 		}
+		add(opcoes);
 		setAlignItems(FlexComponent.Alignment.STRETCH);
 	}
 
 	public MenuComponent() { }
 
-	public MenuComponent(String width, String height) {
+	public MenuComponent(String width, String height, String header, int colunas) {
 		this();
 		this.setWidth(width);
 		this.setHeight(height);
+		this.header = header;
+		this.colunas = colunas;
 	}
 }
