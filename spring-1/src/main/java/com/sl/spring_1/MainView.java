@@ -18,6 +18,7 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.formlayout.FormLayout.ResponsiveStep;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
@@ -42,23 +43,33 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 @Route("/ui")
-public class MainView extends FormLayout {
+public class MainView extends VerticalLayout {
 
 	private static final Logger logger = LogManager.getLogger(MyController.class);
-
+	
 	public MainView() {
+
+		MenuComponent mc1 = new MenuComponent("50%", "100%", "Menu Opções de Cadastros", 3, this);
+		mc1.createOptions(Arrays.asList(MenuCommand.cadClientes(this), MenuCommand.cadastroFornecedores(),
+				MenuCommand.castroFornecedores(), MenuCommand.filtro()));
+		add(mc1);
+		
+		
+	}
+	
+	
+	public void MainView11() {
 		TextField firstName = new TextField("First Name:");
 		TextField lastName = new TextField("Last Name:");
 		TextField userName = new TextField("Username:");
 		PasswordField password = new PasswordField("Password");
 		PasswordField confirm = new PasswordField("Password");
 
-		setResponsiveSteps(new ResponsiveStep("0px", 1), new ResponsiveStep("800px", 2));
-		
-		setColspan(userName, 2);
+//		setResponsiveSteps(new ResponsiveStep("0px", 1), new ResponsiveStep("800px", 2));
+//		
+//		setColspan(userName, 2);
 		
 		add(firstName, lastName, userName, password, confirm);
-		
 	}
 
 	public void MainView10() {
@@ -73,10 +84,10 @@ public class MainView extends FormLayout {
 
 	public void MainView9() {
 		// Sample use Menu Component
-		MenuComponent mc1 = new MenuComponent("50%", "100%", "Menu Opções de Cadastros", 3);
-		mc1.createOptions(Arrays.asList(MenuCommand.cadastroClientes(), MenuCommand.cadastroFornecedores(),
-				MenuCommand.castroFornecedores(), MenuCommand.filtro()));
-		add(mc1);
+//		MenuComponent mc1 = new MenuComponent("50%", "100%", "Menu Opções de Cadastros", 3);
+//		mc1.createOptions(Arrays.asList(MenuCommand.cadastroClientes(this), MenuCommand.cadastroFornecedores(this),
+//				MenuCommand.castroFornecedores(), MenuCommand.filtro()));
+//		add(mc1);
 	}
 
 	public void MainView8() {

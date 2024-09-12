@@ -23,6 +23,7 @@ public class MenuComponent extends VerticalLayout {
 	String height;
 	String header;
 	int colunas;
+	VerticalLayout layout;
 
 	public void createOptions(List<ObjectMenuComponent> menus) {
 		if (!this.header.isEmpty()) {
@@ -50,15 +51,17 @@ public class MenuComponent extends VerticalLayout {
 		}
 		add(opcoes);
 		setAlignItems(FlexComponent.Alignment.STRETCH);
+		layout.add(this);
 	}
 
 	public MenuComponent() { }
 
-	public MenuComponent(String width, String height, String header, int colunas) {
+	public MenuComponent(String width, String height, String header, int colunas, VerticalLayout layout) {
 		this();
 		this.setWidth(width);
 		this.setHeight(height);
 		this.header = header;
 		this.colunas = colunas;
+		this.layout = layout;
 	}
 }
