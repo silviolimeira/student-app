@@ -1,0 +1,24 @@
+Apache POI: Read and Write Excel File
+https://howtodoinjava.com/java/library/readingwriting-excel-files-in-java-poi-tutorial/
+
+How do I create a file and write to it?
+https://stackoverflow.com/questions/2885173/how-do-i-create-a-file-and-write-to-it
+
+
+-- udemy.address definition
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
+  `ncm` varchar(255) DEFAULT NULL,
+  `cfop` varchar(255) DEFAULT NULL,
+  `cest` varchar(255) DEFAULT NULL,
+  `cst_csosn` varchar(255) DEFAULT NULL,
+  `icms_aliq` varchar(255) DEFAULT NULL,
+  `pis_cod` varchar(255) DEFAULT NULL,
+  `pis_aliq` varchar(255) DEFAULT NULL,
+  `cofins_cod` varchar(255) DEFAULT NULL,
+  `cofins_aliq` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+

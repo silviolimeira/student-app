@@ -16,6 +16,7 @@
   	<module>student-listeners</module>
   	<module>student-spring</module>
   	<module>spring-1</module>
+  	<module>student-excel</module>
   </modules>
   <build>
     <plugins>
