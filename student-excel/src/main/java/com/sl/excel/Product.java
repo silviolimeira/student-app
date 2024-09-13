@@ -2,44 +2,59 @@ package com.sl.excel;
 
 public class Product {
 
-	String codigo;
-	String nome;
+//	select id,barcode, name, category_id, price, type, print_production, price, 
+//	ncm, cfop, tax4_code, tax1_code, tax1, tax2_code, tax2, tax3_code, tax3 from product where internal_code = 100;
+
+	String internal_code;
+	String name;
 	String ncm;
 	String cfop;
-	String cest;
-	String cst_csosn;
-	String icms_aliq;
-	String pis_cod;
-	String pis_aliq;
-	String cofins_cod;
-	String cofins_aliq;
+	String tax4_code;
+	String tax1_code;
+	String tax1;
+	String tax2_code;
+	String tax2;
+	String tax3_code;
+	String tax3;
 
 	public Product() {
 	}
 
-	public Product(String codigo, String nome, String ncm, String cfop, String cest, String cst_csosn, String icms_aliq,
-			String pis_cod, String pis_aliq, String cofins_cod, String cofins_aliq) {
+	public Product(String internal_code, String name, String ncm, String cfop, String tax4_code, String tax1_code,
+			String tax1, String tax2_code, String tax2, String tax3_code, String tax3) {
 		super();
-		this.codigo = codigo;
-		this.nome = nome;
+		this.internal_code = internal_code;
+		this.name = name;
 		this.ncm = ncm;
 		this.cfop = cfop;
-		this.cest = cest;
-		this.cst_csosn = cst_csosn;
-		this.icms_aliq = icms_aliq;
-		this.pis_cod = pis_cod;
-		this.pis_aliq = pis_aliq;
-		this.cofins_cod = cofins_cod;
-		this.cofins_aliq = cofins_aliq;
+		this.tax4_code = tax4_code;
+		this.tax1_code = tax1_code;
+		this.tax1 = tax1;
+		this.tax2_code = tax2_code;
+		this.tax2 = tax2;
+		this.tax3_code = tax3_code;
+		this.tax3 = tax3;
+	}
+
+	public String toStringDDL() {
+		return String.format("UPDATE db000.product SET %s='%s',%s='%s',%s='%s',%s='%s',%s='%s',%s='%s',%s='%s',%s='%s', WHERE internal_code=%s;", 
+				"ncm",ncm,
+				"cfop", cfop,
+				"tax4_code", tax4_code,
+				"tax1_code", tax1_code,
+				"tax1", tax1,
+				"tax2_code", tax2_code,
+				"tax3_code", tax3_code,
+				"tax3", tax3,
+				internal_code);
+
 	}
 
 	@Override
 	public String toString() {
-//		return "Product [codigo=" + codigo + ", nome=" + nome + ", ncm=" + ncm + ", cfop=" + cfop + ", cest=" + cest
-//				+ ", cst_csosn=" + cst_csosn + ", icms_aliq=" + icms_aliq + ", pis_cod=" + pis_cod + ", pis_aliq="
-//				+ pis_aliq + ", cofins_cod=" + cofins_cod + ", cofins_aliq=" + cofins_aliq + "]";
-		return String.format("UDATE db000.product SET %s=\'%s\',%s=\'%s\',%s=\'%s\',%s=\'%s\',%s=\'%s\',%s=\'%s\',%s=\'%s\',%s=\'%s\',%s=\'%s\' WHERE codigo=%s;",
-				"ncm", ncm, "cfop", cfop, "cest", cest, "cst_csosn", cst_csosn, "icms_aliq", icms_aliq, "pis_cod", pis_cod, "pis_aliq", pis_aliq,"cofins_cod", cofins_cod, "cofins_aliq", cofins_aliq, codigo);		
-
+		return "Product [internal_code=" + internal_code + ", name=" + name + ", ncm=" + ncm + ", cfop=" + cfop
+				+ ", tax4_code=" + tax4_code + ", tax1_code=" + tax1_code + ", tax1=" + tax1 + ", tax2_code="
+				+ tax2_code + ", tax2=" + tax2 + ", tax3_code=" + tax3_code + ", tax3=" + tax3 + "]";
 	}
+	
 }
