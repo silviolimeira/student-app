@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
+//@Entity
 public class Student {
 
 	@Id
@@ -18,7 +18,7 @@ public class Student {
 	@Column(name = "student_name")
 	private String studentName;
 
-	@ManyToOne
+	//@ManyToOne
 	@JoinColumn(name = "universityId")
 	private University university;
 

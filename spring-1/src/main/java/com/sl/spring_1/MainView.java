@@ -1,45 +1,13 @@
 package com.sl.spring_1;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sl.spring_1.component.menu.ButtonMenuComponent;
-import com.sl.spring_1.component.menu.MenuCommand;
-import com.sl.spring_1.component.menu.MenuComponent;
-import com.sl.spring_1.component.menu.ObjectMenuComponent;
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.checkbox.CheckboxGroup;
-import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.formlayout.FormLayout.ResponsiveStep;
-import com.vaadin.flow.component.grid.ColumnTextAlign;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.sl.spring_1.adm.menu.AdminMenuLayout;
+import com.sl.spring_1.adm.menu.MenuCommand;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.TabVariant;
-import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.component.tabs.TabsVariant;
-import com.vaadin.flow.component.textfield.PasswordField;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 @Route("/ui")
@@ -48,6 +16,15 @@ public class MainView extends VerticalLayout {
 	private static final Logger logger = LogManager.getLogger(MyController.class);
 	
 	public MainView() {
+		AdminMenuLayout mc = new AdminMenuLayout("50%", "100%", "Forms", 3, this);
+		mc.createOptions(Arrays.asList(MenuCommand.regSection(this),
+				MenuCommand.regGroup(this),
+				MenuCommand.regField(this)));
+		
+	}
+	
+	/*
+	public void MainView11() {
 
 		MenuComponent mc1 = new MenuComponent("50%", "100%", "Menu Opções de Cadastros", 3, this);
 		mc1.createOptions(Arrays.asList(MenuCommand.cadClientes(this), MenuCommand.cadastroFornecedores(),
@@ -235,4 +212,5 @@ public class MainView extends VerticalLayout {
 		add(nameField);
 		add(button);
 	}
+	*/
 }
