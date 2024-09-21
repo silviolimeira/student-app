@@ -17,6 +17,7 @@
   	<module>student-spring</module>
   	<module>spring-1</module>
   	<module>student-excel</module>
+  	<module>bookstore</module>
   </modules>
   <build>
     <plugins>
