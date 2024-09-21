@@ -1,9 +1,8 @@
-package com.sl.spring_1.adm.menu;
+package com.sl.spring_1.adm.view.menu;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sl.spring_1.adm.form.FormEnum;
 import com.sl.spring_1.adm.jpa.Section;
 import com.sl.spring_1.adm.view.FieldView;
 import com.sl.spring_1.adm.view.GroupView;
@@ -20,18 +19,18 @@ public abstract class RouterLinkMenuComponent extends MenuComponent {
 	
 	RouterLink routerLink;
 
-	public <T> RouterLinkMenuComponent(FormEnum section, String height, String width) {
+	public <T> RouterLinkMenuComponent(MenuEnum section, String height, String width, T service) {
 		switch (section) {
 			default:
-			case FormEnum.CAD_SECTION:
+			case MenuEnum.MODULE_SECTION:
 				this.title = "Register Section";
 				this.routerLink = new RouterLink(this.title, SectionView.class);
 				break;
-			case FormEnum.CAD_GROUP:
+			case MenuEnum.CAD_GROUP:
 				this.title = "Register Group";
 				this.routerLink = new RouterLink(this.title, GroupView.class);
 				break;
-			case FormEnum.CAD_FIELD:
+			case MenuEnum.CAD_FIELD:
 				this.title = "Register Field";
 				this.routerLink = new RouterLink(this.title, FieldView.class);
 				break;

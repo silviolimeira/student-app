@@ -10,9 +10,6 @@
     <persistence-unit name="com.sl.manytoone" transaction-type="RESOURCE_LOCAL">  
     	
     	<!--   <provider>org.hibernate.ejb.HibernatePersistence</provider>   -->
-    	
-		<class>com.sl.manytoone.Student</class>
-		<class>com.sl.manytoone.University</class>
         
         <properties>
        		<property name="hibernate.archive.autodetection" value="class" />

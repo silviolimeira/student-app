@@ -3,6 +3,8 @@ package com.sl.spring_1.adm.jpa;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sl.spring_1.adm.model.SectionDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,16 @@ public class Section {
 		this.groups = new ArrayList<>();
 	}
 	
+	public Section(SectionDTO dto) {
+		this();
+		this.sectionId = dto.getId();
+		this.type = dto.getType();
+		this.title = dto.getTitle();
+		this.hint = dto.getHint();
+		this.description = dto.getDescription();
+		this.width = dto.getWidth();
+		this.height = dto.getHeight();
+	}
 	public void addGroup(Group group) {
 		this.groups.add(group);
 	}

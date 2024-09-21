@@ -1,14 +1,14 @@
-package com.sl.spring_1.adm.form;
+package com.sl.spring_1.adm.view.menu;
 
-public enum FormEnum {
+public enum MenuEnum {
 	
-    CAD_SECTION("cad_section"),
+    MODULE_SECTION("module_section"),
     CAD_GROUP("cad_group"),
     CAD_FIELD("cad_field"),
     ;
     private final String modal;
 
-    FormEnum(final String modal) {
+    MenuEnum(final String modal) {
         this.modal = modal;
     }
 

@@ -1,4 +1,4 @@
-package com.sl.spring_1.adm.menu;
+package com.sl.spring_1.adm.view.menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,7 @@ public class AdminMenuLayout extends VerticalLayout {
 	String header;
 	int colunas;
 	VerticalLayout layout;
+	MenuCommand menuCommand;
 
 	public void createOptions(List<MenuComponent> menus) {
 		if (!this.header.isEmpty()) {
@@ -57,7 +58,9 @@ public class AdminMenuLayout extends VerticalLayout {
 		layout.add(this);
 	}
 
-	public AdminMenuLayout() { }
+	public AdminMenuLayout() { 
+		menuCommand = new MenuCommand();
+	}
 
 	public AdminMenuLayout(String width, String height, String header, int colunas, VerticalLayout layout) {
 		this();
@@ -67,5 +70,11 @@ public class AdminMenuLayout extends VerticalLayout {
 		this.colunas = colunas;
 		this.layout = layout;
 	}
+
+	public MenuCommand getMenuCommand() {
+		return menuCommand;
+	}
+	
+	
 
 }

@@ -24,17 +24,17 @@ public class App {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.sl.manytoone");
 		EntityManager entityManager = factory.createEntityManager();
 
-		University university = new University("MIT");
+		//University university = new University("MIT");
 		
-		Student s1 = new Student();
-		s1.setStudentName("Kevin");
-		s1.setUniversity(university);
+//		Student s1 = new Student();
+//		s1.setStudentName("Kevin");
+//		s1.setUniversity(university);
+//		
+//		Student s2 = new Student();
+//		s2.setStudentName("Joe");
+//		s2.setUniversity(university);
 		
-		Student s2 = new Student();
-		s2.setStudentName("Joe");
-		s2.setUniversity(university);
-		
-		save(new Object[] {university, s1, s2}, entityManager);
+//		save(new Object[] {university, s1, s2}, entityManager);
 		
 		entityManager.close();
 		factory.close();

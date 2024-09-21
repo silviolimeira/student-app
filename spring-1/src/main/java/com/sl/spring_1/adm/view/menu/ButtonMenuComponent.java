@@ -1,9 +1,8 @@
-package com.sl.spring_1.adm.menu;
+package com.sl.spring_1.adm.view.menu;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sl.spring_1.adm.form.FormEnum;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Span;
 
@@ -13,16 +12,16 @@ public abstract class ButtonMenuComponent extends MenuComponent {
 	
 	Button button;
 
-	public ButtonMenuComponent(FormEnum cadSection, String height, String width) {
+	protected <T> ButtonMenuComponent(MenuEnum cadSection, String height, String width, T service) {
 		this.title = cadSection.toString();
 		this.button = new Button(cadSection.toString());
 		this.button.setHeight(height);
 		this.button.setWidth(width);
 		this.button.addClickListener(event -> {
-			this.execute();
+			this.execute(service);
 		});
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}

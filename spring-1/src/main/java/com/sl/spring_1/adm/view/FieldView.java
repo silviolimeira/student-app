@@ -11,6 +11,8 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Field")
 public class FieldView extends VerticalLayout implements BeforeEnterObserver {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void beforeEnter(BeforeEnterEvent event) {
 		add(new Text("Group fields ..."));
