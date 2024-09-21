@@ -49,21 +49,36 @@ public class App
 					switch (cell.getCellType()) 
 					{
 						case NUMERIC:
-							//System.out.print(cell.getNumericCellValue() + "\t");
+							System.out.print(cell.getNumericCellValue() + "\t");
 							cols[c++] = Double.toString(cell.getNumericCellValue());
 							break;
 						case STRING:
-							//System.out.print(cell.getStringCellValue() + "\t");
+							System.out.print(cell.getStringCellValue() + "\t");
 							cols[c++] = cell.getStringCellValue();
 							break;
 						default:
 							throw new IllegalStateException("Unexpected value: " + cell.getCellType());
 					}
 				}
-				product = new Product(cols[0], cols[2], cols[14],cols[15],cols[16],cols[17],cols[18],cols[19],cols[20],cols[21],cols[22]);
-				products.add(product);
-				System.out.println(product.toString());
 				System.out.println("");
+				
+				
+//				product = new Product(cols[4],  // internal_code
+//						cols[2], //name 
+//						cols[40], //ncm
+//						cols[41], //cfop
+//						cols[37], //tax4_code
+//						cols[34], //tax1_code
+//						cols[28], //tax1
+//						cols[35], //tax2_code
+//						cols[29], //tax2
+//						cols[36], //tax3_code
+//						cols[30]); //tax3
+				
+				product = new Product(cols[0], cols[2], cols[14],cols[15],cols[16],cols[17],cols[18],cols[19],cols[20],cols[21],cols[22]);
+
+				System.out.println(product);
+				products.add(product);
 			}
 			file.close();
 		} 
@@ -77,7 +92,10 @@ public class App
 			int l = 0;
 			for (Product p : products) {
 				l++;
-				if (l > 2) writer.println(p);
+				if (l > 2) {
+					writer.println(p.toStringDDL());
+					System.out.println(p);
+				}
 			}
 			writer.close();
 			
