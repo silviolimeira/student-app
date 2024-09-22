@@ -23,6 +23,7 @@ public class SampleGrid extends VerticalLayout {
 
 	
 	public void sample() {
+		/*
 		// BEGIN-EXAMPLE: component.grid.filtering
         // Have a filterable container
         IndexedContainer container = exampleDataSource();
@@ -62,6 +63,8 @@ public class SampleGrid extends VerticalLayout {
         }
 
         layout.addComponent(grid);
-        // END-EXAMPLE: component.grid.filtering		
+        // END-EXAMPLE: component.grid.filtering
+          		
+         */
 	}
 }
