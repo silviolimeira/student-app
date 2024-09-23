@@ -19,24 +19,26 @@ public class UserRepository {
 	public static void initialize() {
 		users.add(new User(new UserId(1),"Silvio", "silvio@gmail.com"));
 		users.add(new User(new UserId(2),"Marqui", "marqui@gmail.com"));
-		users.add(new User(new UserId(3),"LimCesar", "cesar@gmail.com"));
+		users.add(new User(new UserId(3),"MarCesar", "cesar@gmail.com"));
 		users.add(new User(new UserId(4),"Limeira", "limeira@www.com"));
 	}
 	
 	public static List<String> filter() {
 		UserRepository ur = new UserRepository();
 		ur.initialize();
+		String[] names = { "Lim", "Mar" };
 		List<String> filters = ur.users.stream()
 				.map(u -> u)
 				.filter(u -> {
 					return u.getId().getInteger() > 2;
 				})
 				.filter(u -> {
-					return u.getEmail().contains("i");
+					return Arrays.stream(names)
+						.anyMatch(u.getName()::contains);
 				})
-				.filter(u -> {
-					return u.getName().startsWith("Lim");
-				})
+//				.filter(u -> {
+//					return u.getName().startsWith("Lim");
+//				})
 				.map(u -> u.getId().getValue())
 				.collect(Collectors.toList());
 		return filters;

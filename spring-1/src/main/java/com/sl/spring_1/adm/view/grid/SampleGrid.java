@@ -21,6 +21,9 @@ public class SampleGrid extends VerticalLayout {
 
 	private static final Logger logger = LogManager.getLogger(SectionView.class);
 
+	//Get Grid Data
+	//ref: https://vaadin.com/forum/t/grid-get-data/158734/6
+	// ((ListDataProvider<T>)grid.getDataProvider()).getItems();
 	
 	public void sample() {
 		/*
