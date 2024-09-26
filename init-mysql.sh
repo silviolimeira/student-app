@@ -89,5 +89,23 @@ ALTER DATABASE <database_name> CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 ALTER TABLE <table_name> CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 ALTER TABLE <table_name> MODIFY <column_name> VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
+
+How to convert all tables in database to one collation?
+ALTER TABLE tbl_name
+[[DEFAULT] CHARACTER SET charset_name]
+[COLLATE collation_name]
+
+SELECT * 
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA="db000"
+AND TABLE_TYPE="BASE TABLE";
+
+CREATE TEMPORARY TABLE IF NOT EXISTS change_colation AS (SELECT CONCAT("ALTER TABLE ", TABLE_SCHEMA, '.', TABLE_NAME," COLLATE your_collation_name_here;") AS ExecuteTheString
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA="db000"
+AND TABLE_TYPE="BASE TABLE");
+
+ALTER TABLE IF NOT EXISTS (SELECT CONCAT("ALTER TABLE ", TABLE_SCHEMA, '.', TABLE_NAME," COLLATE your_collation_name_here;)
+
                 
          
