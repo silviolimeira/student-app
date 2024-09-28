@@ -1,0 +1,6 @@
+$ sudo apt install hey
+
+hey -n 32 -c 32 http://localhost:8080/
+
+ref: Handle 1,000,000 Threads with Java and Spring Boot !!!
+https://www.youtube.com/watch?v=yLEEyErPQ2g
