@@ -15,9 +15,9 @@ public class JdbcQuery {
 	private static final String JDBC_DRIVER =
 			"com.mysql.cj.jdbc.Driver";
 	private static final String DATABASE_URL = 
-			"jdbc:mysql://localhost/udemy?serverTimezone=UTC";
+			"jdbc:mysql://localhost/db000?serverTimezone=UTC";
 	private static final String USERNAME = "root";
-	private static final String PASSWORD = "root";
+	private static final String PASSWORD = "";
 	
 	public void handleDatabase()  
 	{
@@ -31,20 +31,19 @@ public class JdbcQuery {
 			connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
 			statement = connection.createStatement();
 			
-			String sqlQuery = "SELECT * FROM students";
+			String sqlQuery = "SHOW TABLES";
 			resultSet = statement.executeQuery(sqlQuery);
 			
 			int id = 0;
 			String name = null;
 			int age = 0;
 			while (resultSet.next()) {
-				id = resultSet.getInt("id");
-				name = resultSet.getString("name");
-				age = resultSet.getInt("age");
+				name = resultSet.getString("Tables_in_db000");
+				logger.info(name);
 			}
 			
-			Student student = new Student(id, name, age);
-			logger.info(student);
+			//Student student = new Student(id, name, age);
+			//logger.info(student);
 			
 			
 		} catch (ClassNotFoundException e) {

@@ -20,7 +20,7 @@ public class PlayerController {
 				.build();
 	}
 
-	@GetMapping("/")
+	@GetMapping("/players")
 	public List<String> getPlayers() {
 		logger.info("Running {}", Thread.currentThread());
 		return restClient
