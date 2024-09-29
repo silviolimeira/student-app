@@ -29,21 +29,10 @@ public class JdbcQuery {
 			Class.forName(JDBC_DRIVER);
 			
 			connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-			statement = connection.createStatement();
-			
-			String sqlQuery = "SHOW TABLES";
-			resultSet = statement.executeQuery(sqlQuery);
-			
-			int id = 0;
-			String name = null;
-			int age = 0;
-			while (resultSet.next()) {
-				name = resultSet.getString("Tables_in_db000");
-				logger.info(name);
-			}
-			
-			//Student student = new Student(id, name, age);
-			//logger.info(student);
+
+			executeColumnUpdate(connection);
+			executeTableUpdate(connection);
+			executeDatabaseUpdate(connection);
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -52,14 +41,80 @@ public class JdbcQuery {
 			logger.error(e);
 		} finally {
 			try {
-				resultSet.close();
+				connection.close();
 			} catch (SQLException e) {
-				logger.error(e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
 		}
 	}
+
+	void executeColumnUpdate(Connection connection) throws SQLException {
+		Statement statement = null;
+		ResultSet resultSet = null;		
+		statement = connection.createStatement();
+		String sqlQuery = "SELECT CONCAT('ALTER TABLE `', TABLE_NAME, '` MODIFY COLUMN `', COLUMN_NAME,'` ', \n"
+				+ "              DATA_TYPE, IF(CHARACTER_MAXIMUM_LENGTH IS NULL \n"
+				+ "       OR DATA_TYPE LIKE 'longtext', '', CONCAT('(', CHARACTER_MAXIMUM_LENGTH, \n"
+				+ "                                         ')') \n"
+				+ "       ), ' COLLATE utf8mb4_unicode_ci ', \n"
+				+ "       IF(INFORMATION_SCHEMA.COLUMNS.IS_NULLABLE = 'YES', 'DEFAULT NULL;', 'NOT NULL;')) \n"
+				+ "       AS 'Columns' \n"
+				+ "FROM   INFORMATION_SCHEMA.COLUMNS \n"
+				+ "WHERE  TABLE_SCHEMA = 'db000' \n"
+				+ "       AND (SELECT INFORMATION_SCHEMA.TABLES.TABLE_TYPE \n"
+				+ "            FROM   INFORMATION_SCHEMA.TABLES \n"
+				+ "            WHERE  INFORMATION_SCHEMA.TABLES.TABLE_SCHEMA = \n"
+				+ "                   INFORMATION_SCHEMA.COLUMNS.TABLE_SCHEMA \n"
+				+ "                   AND INFORMATION_SCHEMA.TABLES.TABLE_NAME = \n"
+				+ "                       INFORMATION_SCHEMA.COLUMNS.TABLE_NAME \n"
+				+ "            LIMIT  1) LIKE 'BASE TABLE' \n"
+				+ "       AND DATA_TYPE IN ( 'char', 'varchar' );";
+		resultSet = statement.executeQuery(sqlQuery);
+		
+		String resultString = null;
+		while (resultSet.next()) {
+			resultString = resultSet.getString("columns");
+			logger.info(resultString);
+			executeUpdate(connection,resultString);
+		}
+		resultSet.close();
+
+	}
 	
+	void executeTableUpdate(Connection connection) throws SQLException {
+		Statement statement = null;
+		ResultSet resultSet = null;		
+		statement = connection.createStatement();
+		
+		String sqlQuery = "SELECT CONCAT('ALTER TABLE `', TABLE_NAME, \n"
+				+ "              '` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;') \n"
+				+ "       AS 'tables' \n"
+				+ "FROM   INFORMATION_SCHEMA.TABLES \n"
+				+ "WHERE  TABLE_SCHEMA = 'db000' \n"
+				+ "       AND TABLE_TYPE LIKE 'BASE TABLE';";
+		resultSet = statement.executeQuery(sqlQuery);
+		
+		String resultString = null;
+		while (resultSet.next()) {
+			resultString = resultSet.getString("tables");
+			logger.info(resultString);
+			executeUpdate(connection,resultString);
+		}
+		resultSet.close();
+	}
 	
+	void executeDatabaseUpdate(Connection connection) throws SQLException {
+		String sqlQuery = "ALTER DATABASE db000 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
+		executeUpdate(connection, sqlQuery);
+	}
+	
+	void executeUpdate(Connection connection, String sql) throws SQLException {
+		Statement statement = null;
+		int resultSet = 0;
+		statement = connection.createStatement();
+		resultSet = statement.executeUpdate(sql);
+		logger.info(resultSet);
+	}
 	
 }
