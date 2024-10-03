@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sl.api.admin.model.SectionDTO;
+import com.sl.api.admin.type.SectionType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,7 +40,7 @@ public class Section {
 	public Section(SectionDTO dto) {
 		this();
 		this.sectionId = dto.getId();
-		this.type = dto.getType();
+		this.type = dto.getType().getValue();
 		this.title = dto.getTitle();
 		this.hint = dto.getHint();
 		this.description = dto.getDescription();

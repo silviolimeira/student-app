@@ -23,10 +23,10 @@ public class SectionServiceImpl implements AppService {
 	}
 	
 	@Override
-	public void save(SectionDTO dto) {
+	public SectionDTO save(SectionDTO dto) {
 		Section section = new Section(dto);
 		logger.info("save={}", dto);
-		sectionRepository.save(section);
+		return new SectionDTO(sectionRepository.save(section));
 	}
 
 	@Override

@@ -1,13 +1,14 @@
 package com.sl.api.admin.model;
 
 import com.sl.api.admin.entity.Section;
+import com.sl.api.admin.type.SectionType;
 
 import jakarta.validation.constraints.NotEmpty;
 
 public class SectionDTO {
 
 	Long id;
-	Integer type;
+	SectionType type;
 
 	@NotEmpty
 	String title;
@@ -24,18 +25,18 @@ public class SectionDTO {
 
 	public SectionDTO(Section section) {
 		this.id = section.getId();
-		this.type = section.getType();
+		this.type = SectionType.valueOf(section.getType());
 		this.hint = section.getHint();
 		this.description = section.getDescription();
 		this.width = section.getWidth();
 		this.height = section.getHeight();
 	}
 	
-	public SectionDTO(Long id, Integer type, @NotEmpty String title, String hint, String description, Integer width,
+	public SectionDTO(Long id, SectionType type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
 		super();
 		this.id = id;
-		this.type = type;
+		this.type = SectionType.valueOf(type.getValue());
 		this.title = title;
 		this.hint = hint;
 		this.description = description;
@@ -51,11 +52,11 @@ public class SectionDTO {
 		this.id = id;
 	}
 
-	public Integer getType() {
-		return type;
+	public SectionType getType() {
+		return this.type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(SectionType type) {
 		this.type = type;
 	}
 

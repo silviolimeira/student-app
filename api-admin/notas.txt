@@ -1,0 +1,17 @@
+curl -H 'Content-Type: application/json' \
+      -d '{ "type": "DIV", "title":"Title", "hint":"hint", "description":"description"}' \
+      -X POST \
+      http://localhost:8091/v1/sections
+      
+      	Long id;
+	Integer type;
+
+	@NotEmpty
+	String title;
+
+	String hint;
+
+	String description;
+
+	Integer width;
+	Integer height;

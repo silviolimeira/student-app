@@ -6,6 +6,6 @@ import com.sl.api.admin.model.SectionDTO;
 
 public interface AppService {
 
-	public void save(SectionDTO section);
+	public SectionDTO save(SectionDTO section);
 	public List<SectionDTO> findAll();
 }
