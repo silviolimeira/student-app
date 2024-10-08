@@ -20,6 +20,8 @@
   	<module>bookstore</module>
   	<module>api</module>
   	<module>front</module>
+  	<module>api-admin</module>
+  	<module>admin</module>
   </modules>
   <build>
     <plugins>
