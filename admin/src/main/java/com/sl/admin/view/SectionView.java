@@ -1,15 +1,17 @@
 package com.sl.admin.view;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sl.admin.model.SectionDTO;
+import com.sl.admin.model.Section;
 import com.sl.admin.service.SectionService;
+import com.sl.admin.type.SectionTypeBean;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -36,25 +38,25 @@ public class SectionView extends VerticalLayout {
 
 	@PropertyId("id")
 	private TextField id; // Long
-	private TextField type; // Integer
 	private TextField title;
 	private TextField hint;
 	private TextField description;
 	private TextField width; // Integer
 	private TextField height; // Integer
+	private ComboBox<SectionTypeBean> type; // SectionTypeEnum
 
 	private Button saveButton;
 	private Button cancelButton;
 
-	private SectionDTO sectionDTO;
-	private Binder<SectionDTO> binder;
+	private Section section;
+	private Binder<Section> binder;
 
-	@Autowired
+	//@Autowired
 	private SectionService sectionService;
 
-	public SectionView() {
-		//this.sectionService = sectionService;
-		//add(new Text("Students Sections ..."));
+	public SectionView(SectionService sectionService) {
+		this.sectionService = sectionService;
+		add(new Text("Students Sections SSS..."));
 		initComponents();
 		initBinder();
 		addComponents();
@@ -91,23 +93,28 @@ public class SectionView extends VerticalLayout {
 		add(linha);
 	}
 
-	public void setSection(SectionDTO sectionDTO) {
-		this.sectionDTO = sectionDTO;
-		binder.readBean(sectionDTO);
+	public void setSection(Section section) {
+		this.section = section;
+		binder.readBean(section);
 	}
 
 	@PostConstruct
 	private void initBinder() {
-		binder = new BeanValidationBinder<>(SectionDTO.class);
+		binder = new BeanValidationBinder<>(Section.class);
 		binder.bindInstanceFields(this);
 	}
 
 	@PostConstruct
 	private void initComponents() {
-		sectionDTO = new SectionDTO();
-		binder = new BeanValidationBinder<>(SectionDTO.class);
+		section = new Section();
+
 		id = new TextField("Id"); // Long
-		type = new TextField("Type"); // Integer
+		
+		SectionTypeBean stb = new SectionTypeBean();
+		type = new ComboBox<SectionTypeBean>("Type"); // SectionType
+		type.setItems(stb.names());
+		type.setItemLabelGenerator(SectionTypeBean::getName);
+
 		title = new TextField("Title");
 		hint = new TextField("Hint");
 		description = new TextField("Description");
@@ -116,8 +123,8 @@ public class SectionView extends VerticalLayout {
 
 		cancelButton = new Button("Cancel", event -> {
 			try {
-				binder.writeBean(sectionDTO);
-				logger.info("Secition={}", sectionDTO);
+				binder.writeBean(section);
+				logger.info("Secition={}", section);
 				getUI().ifPresent(ui -> ui.navigate(SectionView.class));
 			} catch (ValidationException e) {
 				logger.error(e);
@@ -127,9 +134,11 @@ public class SectionView extends VerticalLayout {
 
 		saveButton = new Button("Save", event -> {
 			try {
-				binder.writeBean(sectionDTO);
-				logger.info("Secition={}", sectionDTO);
-				sectionService.save(sectionDTO);
+				binder.writeBean(section);
+				//sectionService.save(sectionDTO);
+				List<Section> list = sectionService.findAll();
+				sectionService.save(section);
+				//logger.info("List<Section>={}", dto);
 				getUI().ifPresent(ui -> ui.navigate(SectionView.class));
 
 			} catch (ValidationException e) {

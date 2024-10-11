@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +37,7 @@ public class SectionController {
 		return ResponseEntity.ok(sectionService.findAll());
 	}
 
+	@CrossOrigin(origins = "http://localhost:8090")
 	@PostMapping
 	public ResponseEntity<SectionDTO> create(@RequestBody SectionDTO dto) {
 		return ResponseEntity.ok(sectionService.save(dto));

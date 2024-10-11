@@ -1,46 +1,31 @@
 package com.sl.admin.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sl.api.admin.model.SectionTypeBean;
-import com.sl.api.admin.type.SectionType;
+import com.sl.admin.type.SectionTypeBean;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class SectionDTO {
+public class Section {
 
-	//@JsonProperty("id")
 	Long id;
-	//@JsonProperty("type")
-	String type;
+	SectionTypeBean type;
 
-	//@JsonProperty("title")
 	@NotEmpty
 	String title;
 
-	//@JsonProperty("hint")
 	String hint;
 
-	//@JsonProperty("description")
 	String description;
 
-	//@JsonProperty("width")
 	Integer width;
-	//@JsonProperty("height")
 	Integer height;
 
-	public SectionDTO(Section section) {
-		this.id = section.getId();
-		this.type = section.getType().getName();
-		this.hint = section.getHint();
-		this.description =  section.getDescription();
-		this.width = section.getWidth();
-		this.height = section.getHeight();
+	public Section() {
 	}
-	
-	public SectionDTO(Long id, SectionType type, @NotEmpty String title, String hint, String description, Integer width,
+
+	public Section(Long id, SectionTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
 		this.id = id;
-		this.type = type.getName();
+		this.type = type;
 		this.title = title;
 		this.hint = hint;
 		this.description = description;
@@ -48,6 +33,16 @@ public class SectionDTO {
 		this.height = height;
 	}
 
+	public Section(SectionDTO dto) {
+		this.id = dto.id;
+		this.type = new SectionTypeBean().getByName(dto.getType());
+		this.title = dto.title;
+		this.hint = dto.hint;
+		this.description = dto.description;
+		this.width = dto.width;
+		this.height = dto.height;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -56,11 +51,11 @@ public class SectionDTO {
 		this.id = id;
 	}
 
-	public String getType() {
-		return this.type;
+	public SectionTypeBean getType() {
+		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(SectionTypeBean type) {
 		this.type = type;
 	}
 

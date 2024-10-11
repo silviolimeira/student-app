@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotEmpty;
 public class SectionDTO {
 
 	Long id;
-	SectionType type;
+	String type;
 
 	@NotEmpty
 	String title;
@@ -25,18 +25,18 @@ public class SectionDTO {
 
 	public SectionDTO(Section section) {
 		this.id = section.getId();
-		this.type = SectionType.valueOf(section.getType());
+		this.type = new SectionTypeBean().getById(section.getType()).getName();
+		this.title = section.getTitle();
 		this.hint = section.getHint();
 		this.description = section.getDescription();
 		this.width = section.getWidth();
 		this.height = section.getHeight();
 	}
 	
-	public SectionDTO(Long id, SectionType type, @NotEmpty String title, String hint, String description, Integer width,
+	public SectionDTO(Long id, SectionTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
-		super();
 		this.id = id;
-		this.type = SectionType.valueOf(type.getValue());
+		this.type = type.getName();
 		this.title = title;
 		this.hint = hint;
 		this.description = description;
@@ -52,11 +52,11 @@ public class SectionDTO {
 		this.id = id;
 	}
 
-	public SectionType getType() {
+	public String getType() {
 		return this.type;
 	}
 
-	public void setType(SectionType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

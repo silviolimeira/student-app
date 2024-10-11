@@ -1,29 +1,19 @@
 package com.sl.api.admin.type;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum SectionType {
-	DIV(1), VERTICAL_LAYOUT(2), HORIZONTAL_LAYOUT(3);
+	DIV(10), VERTICAL_LAYOUT(20), HORIZONTAL_LAYOUT(30);
 
     private int value;
-    private static Map<Object, Object> map = new HashMap<>();
 
-    private SectionType(int value) {
+    SectionType(int value) {
         this.value = value;
     }
-
-    static {
-        for (SectionType sectionType : SectionType.values()) {
-            map.put(sectionType.value, sectionType);
-        }
-    }
-
-    public static SectionType valueOf(int sectionType) {
-        return (SectionType) map.get(sectionType);
-    }
-
+    
     public int getValue() {
         return value;
     }
+    public String getName() {
+    	return name();
+    }
+    
 }

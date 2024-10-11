@@ -26,7 +26,8 @@ public class SectionServiceImpl implements AppService {
 	public SectionDTO save(SectionDTO dto) {
 		Section section = new Section(dto);
 		logger.info("save={}", dto);
-		return new SectionDTO(sectionRepository.save(section));
+		var sec = new SectionDTO(sectionRepository.save(section)); 
+		return sec;
 	}
 
 	@Override
