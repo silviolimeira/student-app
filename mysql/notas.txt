@@ -1,0 +1,59 @@
+TODO - Test Replicas Mysql
+https://www.youtube.com/watch?v=2mq8aGRaL1o
+
+sudo ufw allow from any to any port 3306
+
+---------------------------------------------------------------------------------
+### primary
+sudo vim /etc/mysql/mysql.conf.d/mysql.cnf
+
+comment #bind-address = 127.0.0.1
+change server-id = 1
+log_bin = /var/log/mysql/mysql-bin.log
+binlog_do_db = exampledb
+
+restart server
+/etc/init.d/mysql restart 
+
+mysql -uroot -p
+mysql> CREATE USER 'replication'@'%' IDENTIFIED WITH mysql_native...
+mysql> GRAN REPLICATION SLAVE ON *.* TO 'replication'@'%';
+mysql> FLUSH PRIVILEGES;
+mysql> SHOW MASTER STATUS;
+
+---------------------------------------------------------------------------------
+### replica
+sudo vim /etc/mysql/mysql.conf.d/mysql.cnf
+
+server-id = 2
+log_bin = /var/log/mysql/mysql-bin.log
+binlog_do_db = exampledb
+relay-log = /var/log/mysql/relay.log
+
+restart server
+/etc/init.d/mysql restart 
+
+mysql -uroot -p
+
+mysql> CHANGE REPLICATION SOURCE TO SOURCE_USER='replication', SOURCE_PASSWORD='password', SOURCE_HOST='%', SOURCE_LOG_FILE='mysql-bin.000001', SOURCE_LOG_POS=867;
+
+TO VERIFY PRIMARY == mysql> SHOW MASTER STATUS;
+
+mysql> START REPLICA;
+mysql> SHOW REPLICA STATUS \G;
+
+---------------------------------------------------------------------------------
+### primary
+
+mysql -uroot -p
+
+mysql> CREATE DATABASE exampledb; ## verify in the mysql server replica
+
+
+
+## CREATE USER / GRANT PRIVILEGES
+
+create user 'user'@'localhost' identified by '12345';
+grant all privileges on *.* to 'user'@'%';
+flush privileges;
+
