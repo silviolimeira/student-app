@@ -12,12 +12,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SL_GROUP")
-public class Group {
+@Table(name = "SL_BRANCH")
+public class Branch {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long groupId;
+	Long branchId;
 
 	Integer type;
 	String title;
@@ -27,10 +27,10 @@ public class Group {
 	Integer height;
 	
 	@ManyToOne
-	@JoinColumn(name = "sectionId")
-	private Section section;
+	@JoinColumn(name = "treeId")
+	private Tree tree;
 
-	public Group() {
+	public Branch() {
 	}
 
 	public Integer getType() {
@@ -82,17 +82,11 @@ public class Group {
 	}
 
 	public Long getId() {
-		return groupId;
+		return branchId;
 	}
 
 	public void setId(Long id) {
-		this.groupId = id;
-	}
-
-	@Override
-	public String toString() {
-		return "Group [id=" + groupId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
-				+ description + ", width=" + width + ", height=" + height + "]";
+		this.branchId = id;
 	}
 
 }

@@ -1,11 +1,14 @@
 package com.sl.api.admin.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.sl.api.admin.model.SectionDTO;
-import com.sl.api.admin.model.SectionTypeBean;
-import com.sl.api.admin.type.SectionType;
+import com.sl.api.admin.model.TreeDTO;
+import com.sl.api.admin.model.TreeTypeBean;
+import com.sl.api.admin.type.TreeType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,13 +19,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SL_SECTION")
-public class Section {
+@Table(name = "SL_TREE")
+public class Tree {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long sectionId;
+	Long treeId;
 
 	Integer type;
 	String title;
@@ -31,28 +34,28 @@ public class Section {
 	Integer width;
 	Integer height;
 	
-	@OneToMany(mappedBy = "section")
-	List<Group> groups;
+	@OneToMany(mappedBy = "tree")
+	Set<Branch> branchs;
 
-	public Section() {
-		this.groups = new ArrayList<>();
+	public Tree() {
+		this.branchs = new HashSet<>();
 	}
 	
-	public Section(SectionDTO dto) {
-		this.sectionId = dto.getId();
-		this.type = new SectionTypeBean().getByName(dto.getType()).getId();
+	public Tree(TreeDTO dto) {
+		this.treeId = dto.getId();
+		this.type = new TreeTypeBean().getByName(dto.getType()).getId();
 		this.title = dto.getTitle();
 		this.hint = dto.getHint();
 		this.description = dto.getDescription();
 		this.width = dto.getWidth();
 		this.height = dto.getHeight();
 	}
-	public void addGroup(Group group) {
-		this.groups.add(group);
+	public void addBranch(Branch branch) {
+		this.branchs.add(branch);
 	}
 	
-	public List<Group> getGroups() {
-		return groups;
+	public Set<Branch> getBranchs() {
+		return branchs;
 	}
 
 	public Integer getType() {
@@ -104,17 +107,11 @@ public class Section {
 	}
 
 	public Long getId() {
-		return sectionId;
+		return treeId;
 	}
 
 	public void setId(Long id) {
-		this.sectionId = id;
-	}
-
-	@Override
-	public String toString() {
-		return "Section [sectionId=" + sectionId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
-				+ description + ", width=" + width + ", height=" + height + "]";
+		this.treeId = id;
 	}
 
 }

@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SL_COMPONENT")
-public class Component {
+@Table(name = "SL_SHEET")
+public class Sheet {
 
 	@Id
 	@Column(name = "id")
@@ -77,12 +77,6 @@ public class Component {
 
 	public void setHeight(Integer height) {
 		this.height = height;
-	}
-
-	@Override
-	public String toString() {
-		return "Component [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
-				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 
 }

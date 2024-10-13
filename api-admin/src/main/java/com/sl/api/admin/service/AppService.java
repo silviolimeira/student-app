@@ -2,10 +2,10 @@ package com.sl.api.admin.service;
 
 import java.util.List;
 
-import com.sl.api.admin.model.SectionDTO;
+import com.sl.api.admin.model.TreeDTO;
 
 public interface AppService {
 
-	public SectionDTO save(SectionDTO section);
-	public List<SectionDTO> findAll();
+	public TreeDTO save(TreeDTO tree);
+	public List<TreeDTO> findAll();
 }

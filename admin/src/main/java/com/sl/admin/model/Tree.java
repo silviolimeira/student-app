@@ -1,14 +1,13 @@
-package com.sl.api.admin.model;
+package com.sl.admin.model;
 
-import com.sl.api.admin.entity.Section;
-import com.sl.api.admin.type.SectionType;
+import com.sl.admin.type.TreeTypeBean;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class SectionDTO {
+public class Tree implements EntityDomain {
 
 	Long id;
-	String type;
+	TreeTypeBean type;
 
 	@NotEmpty
 	String title;
@@ -19,24 +18,19 @@ public class SectionDTO {
 
 	Integer width;
 	Integer height;
-
-	public SectionDTO() {
-	}
-
-	public SectionDTO(Section section) {
-		this.id = section.getId();
-		this.type = new SectionTypeBean().getById(section.getType()).getName();
-		this.title = section.getTitle();
-		this.hint = section.getHint();
-		this.description = section.getDescription();
-		this.width = section.getWidth();
-		this.height = section.getHeight();
-	}
 	
-	public SectionDTO(Long id, SectionTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
+	@Override
+	public String[] getColumns() {
+		return new String[]{"id", "type", "hint", "description", "width", "height"};
+	}
+
+	public Tree() {
+	}
+
+	public Tree(Long id, TreeTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
 		this.id = id;
-		this.type = type.getName();
+		this.type = type;
 		this.title = title;
 		this.hint = hint;
 		this.description = description;
@@ -44,6 +38,16 @@ public class SectionDTO {
 		this.height = height;
 	}
 
+	public Tree(TreeDTO dto) {
+		this.id = dto.id;
+		this.type = new TreeTypeBean().getByName(dto.getType());
+		this.title = dto.title;
+		this.hint = dto.hint;
+		this.description = dto.description;
+		this.width = dto.width;
+		this.height = dto.height;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -52,11 +56,11 @@ public class SectionDTO {
 		this.id = id;
 	}
 
-	public String getType() {
-		return this.type;
+	public TreeTypeBean getType() {
+		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(TreeTypeBean type) {
 		this.type = type;
 	}
 
@@ -100,10 +104,5 @@ public class SectionDTO {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "SectionDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
-				+ description + ", width=" + width + ", height=" + height + "]";
-	}
 
 }

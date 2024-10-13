@@ -1,5 +1,5 @@
--- INSERT INTO SL_SECTION (id, title) VALUES (1, 'Cadastro de Usuarios');
--- INSERT INTO SL_SECTION (id, title) VALUES (2, 'Cadastro de Clientes');
--- INSERT INTO SL_SECTION (id, title) VALUES (3, 'Cadastro de Fornecedores');
--- INSERT INTO SL_SECTION (id, title) VALUES (4, 'Cadastro de Funcionarios');
+-- INSERT INTO SL_TREE (id, title) VALUES (1, 'Cadastro de Usuarios');
+-- INSERT INTO SL_TREE (id, title) VALUES (2, 'Cadastro de Clientes');
+-- INSERT INTO SL_TREE (id, title) VALUES (3, 'Cadastro de Fornecedores');
+-- INSERT INTO SL_TREE (id, title) VALUES (4, 'Cadastro de Funcionarios');
 

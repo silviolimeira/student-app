@@ -14,33 +14,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.sl.api.admin.entity.Section;
-import com.sl.api.admin.model.SectionDTO;
-import com.sl.api.admin.repository.SectionRepository;
+import com.sl.api.admin.entity.Tree;
+import com.sl.api.admin.model.TreeDTO;
+import com.sl.api.admin.repository.TreeRepository;
 import com.sl.api.admin.service.AppService;
-import com.sl.api.admin.service.SectionServiceImpl;
+import com.sl.api.admin.service.TreeServiceImpl;
 
 @RestController
-@RequestMapping("v1/sections")
-public class SectionController {
+@RequestMapping("v1/trees")
+public class TreeController {
 
-	private static final Logger logger = LogManager.getLogger(SectionController.class);
+	private static final Logger logger = LogManager.getLogger(TreeController.class);
 
-	private AppService sectionService;
+	private AppService treeService;
 
-	public SectionController(AppService sectionService) {
-		this.sectionService = sectionService;
+	public TreeController(AppService treeService) {
+		this.treeService = treeService;
 	}
 
 	@GetMapping
-	public ResponseEntity<List<SectionDTO>> findAll() {
-		return ResponseEntity.ok(sectionService.findAll());
+	public ResponseEntity<List<TreeDTO>> findAll() {
+		return ResponseEntity.ok(treeService.findAll());
 	}
 
 	@CrossOrigin(origins = "http://localhost:8090")
 	@PostMapping
-	public ResponseEntity<SectionDTO> create(@RequestBody SectionDTO dto) {
-		return ResponseEntity.ok(sectionService.save(dto));
+	public ResponseEntity<TreeDTO> create(@RequestBody TreeDTO dto) {
+		return ResponseEntity.ok(treeService.save(dto));
 	}
 
 }

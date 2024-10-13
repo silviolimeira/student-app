@@ -1,13 +1,14 @@
-package com.sl.admin.model;
+package com.sl.api.admin.model;
 
-import com.sl.admin.type.SectionTypeBean;
+import com.sl.api.admin.entity.Tree;
+import com.sl.api.admin.type.TreeType;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class Section {
+public class TreeDTO {
 
 	Long id;
-	SectionTypeBean type;
+	String type;
 
 	@NotEmpty
 	String title;
@@ -19,13 +20,23 @@ public class Section {
 	Integer width;
 	Integer height;
 
-	public Section() {
+	public TreeDTO() {
 	}
 
-	public Section(Long id, SectionTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
+	public TreeDTO(Tree tree) {
+		this.id = tree.getId();
+		this.type = new TreeTypeBean().getById(tree.getType()).getName();
+		this.title = tree.getTitle();
+		this.hint = tree.getHint();
+		this.description = tree.getDescription();
+		this.width = tree.getWidth();
+		this.height = tree.getHeight();
+	}
+	
+	public TreeDTO(Long id, TreeTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
 		this.id = id;
-		this.type = type;
+		this.type = type.getName();
 		this.title = title;
 		this.hint = hint;
 		this.description = description;
@@ -33,16 +44,6 @@ public class Section {
 		this.height = height;
 	}
 
-	public Section(SectionDTO dto) {
-		this.id = dto.id;
-		this.type = new SectionTypeBean().getByName(dto.getType());
-		this.title = dto.title;
-		this.hint = dto.hint;
-		this.description = dto.description;
-		this.width = dto.width;
-		this.height = dto.height;
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -51,11 +52,11 @@ public class Section {
 		this.id = id;
 	}
 
-	public SectionTypeBean getType() {
-		return type;
+	public String getType() {
+		return this.type;
 	}
 
-	public void setType(SectionTypeBean type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -97,12 +98,6 @@ public class Section {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@Override
-	public String toString() {
-		return "SectionDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
-				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 
 }

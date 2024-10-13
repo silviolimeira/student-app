@@ -1,12 +1,10 @@
 package com.sl.admin.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sl.api.admin.model.SectionTypeBean;
-import com.sl.api.admin.type.SectionType;
+import com.sl.api.admin.type.TreeType;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class SectionDTO {
+public class TreeDTO {
 
 	//@JsonProperty("id")
 	Long id;
@@ -28,16 +26,16 @@ public class SectionDTO {
 	//@JsonProperty("height")
 	Integer height;
 
-	public SectionDTO(Section section) {
-		this.id = section.getId();
-		this.type = section.getType().getName();
-		this.hint = section.getHint();
-		this.description =  section.getDescription();
-		this.width = section.getWidth();
-		this.height = section.getHeight();
+	public TreeDTO(Tree tree) {
+		this.id = tree.getId();
+		this.type = tree.getType().getName();
+		this.hint = tree.getHint();
+		this.description =  tree.getDescription();
+		this.width = tree.getWidth();
+		this.height = tree.getHeight();
 	}
 	
-	public SectionDTO(Long id, SectionType type, @NotEmpty String title, String hint, String description, Integer width,
+	public TreeDTO(Long id, TreeType type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
 		this.id = id;
 		this.type = type.getName();
@@ -102,12 +100,6 @@ public class SectionDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@Override
-	public String toString() {
-		return "SectionDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
-				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 
 }
