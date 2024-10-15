@@ -3,41 +3,41 @@ package com.sl.admin.type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SectionTypeBean {
+public class TreeTypeBean {
 
-	List<SectionTypeBean> list;
+	List<TreeTypeBean> list;
 
 	int id;
 	String name;
 
-	public SectionTypeBean() {
+	public TreeTypeBean() {
 		list = new ArrayList<>();
 		
-		for (SectionType t : SectionType.values()) { 
-		    list.add(new SectionTypeBean(t.getValue(), t.getName())); 
+		for (TreeType t : TreeType.values()) { 
+		    list.add(new TreeTypeBean(t.getValue(), t.getName())); 
 		}
 	}
 	
-	public SectionTypeBean getById(int id) {
-		for (SectionTypeBean t : list) { 
+	public TreeTypeBean getById(int id) {
+		for (TreeTypeBean t : list) { 
 		    if (t.getId() == id) return t; 
 		}
 		return null;
 	}
 	
-	public SectionTypeBean getByName(String name) {
-		for (SectionTypeBean t : list) { 
+	public TreeTypeBean getByName(String name) {
+		for (TreeTypeBean t : list) { 
 		    if (t.getName().equalsIgnoreCase(name)) return t; 
 		}
 		return null;
 	}	
 	
-	public SectionTypeBean(int id, String name) {
+	public TreeTypeBean(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public List<SectionTypeBean> names() {
+	public List<TreeTypeBean> names() {
 		return list;
 	}
 
@@ -59,7 +59,7 @@ public class SectionTypeBean {
 
 	@Override
 	public String toString() {
-		return "SectionTypeBean [name=" + name + "]";
+		return "TreeTypeBean [name=" + name + "]";
 	}
 	
 	

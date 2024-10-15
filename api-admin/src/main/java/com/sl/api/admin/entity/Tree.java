@@ -1,23 +1,27 @@
 package com.sl.api.admin.entity;
 
-import org.hibernate.annotations.ManyToAny;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sl.api.admin.model.TreeDTO;
+import com.sl.api.admin.model.TreeTypeBean;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SL_GROUP")
-public class Group {
+@Table(name = "SL_TREE")
+public class Tree {
 
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long groupId;
+	Long treeId;
 
 	Integer type;
 	String title;
@@ -26,11 +30,28 @@ public class Group {
 	Integer width;
 	Integer height;
 	
-	@ManyToOne
-	@JoinColumn(name = "sectionId")
-	private Section section;
+	@OneToMany(mappedBy = "tree")
+	List<Branch> groups;
 
-	public Group() {
+	public Tree() {
+		this.groups = new ArrayList<>();
+	}
+	
+	public Tree(TreeDTO dto) {
+		this.treeId = dto.getId();
+		this.type = new TreeTypeBean().getByName(dto.getType()).getId();
+		this.title = dto.getTitle();
+		this.hint = dto.getHint();
+		this.description = dto.getDescription();
+		this.width = dto.getWidth();
+		this.height = dto.getHeight();
+	}
+	public void addGroup(Branch group) {
+		this.groups.add(group);
+	}
+	
+	public List<Branch> getGroups() {
+		return groups;
 	}
 
 	public Integer getType() {
@@ -82,16 +103,16 @@ public class Group {
 	}
 
 	public Long getId() {
-		return groupId;
+		return treeId;
 	}
 
 	public void setId(Long id) {
-		this.groupId = id;
+		this.treeId = id;
 	}
 
 	@Override
 	public String toString() {
-		return "Group [id=" + groupId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+		return "Tree [treeId=" + treeId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
 				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 

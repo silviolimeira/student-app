@@ -1,28 +1,20 @@
 package com.sl.api.admin.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sl.api.admin.model.SectionDTO;
-import com.sl.api.admin.model.SectionTypeBean;
-import com.sl.api.admin.type.SectionType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SL_SECTION")
-public class Section {
+@Table(name = "SL_SHEET")
+public class Sheet {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long sectionId;
+	Long id;
 
 	Integer type;
 	String title;
@@ -30,29 +22,13 @@ public class Section {
 	String description;
 	Integer width;
 	Integer height;
-	
-	@OneToMany(mappedBy = "section")
-	List<Group> groups;
 
-	public Section() {
-		this.groups = new ArrayList<>();
+	public Long getId() {
+		return id;
 	}
-	
-	public Section(SectionDTO dto) {
-		this.sectionId = dto.getId();
-		this.type = new SectionTypeBean().getByName(dto.getType()).getId();
-		this.title = dto.getTitle();
-		this.hint = dto.getHint();
-		this.description = dto.getDescription();
-		this.width = dto.getWidth();
-		this.height = dto.getHeight();
-	}
-	public void addGroup(Group group) {
-		this.groups.add(group);
-	}
-	
-	public List<Group> getGroups() {
-		return groups;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getType() {
@@ -103,17 +79,9 @@ public class Section {
 		this.height = height;
 	}
 
-	public Long getId() {
-		return sectionId;
-	}
-
-	public void setId(Long id) {
-		this.sectionId = id;
-	}
-
 	@Override
 	public String toString() {
-		return "Section [sectionId=" + sectionId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+		return "Sheet [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
 				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 

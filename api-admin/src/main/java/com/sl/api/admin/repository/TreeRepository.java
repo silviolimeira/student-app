@@ -3,9 +3,9 @@ package com.sl.api.admin.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sl.api.admin.entity.Section;
+import com.sl.api.admin.entity.Tree;
 
 @Repository
-public interface SectionRepository extends JpaRepository<Section, Long> {
+public interface TreeRepository extends JpaRepository<Tree, Long> {
 
 }

@@ -1,13 +1,13 @@
 package com.sl.admin.model;
 
-import com.sl.admin.type.SectionTypeBean;
+import com.sl.admin.type.TreeTypeBean;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class Section {
+public class Tree {
 
 	Long id;
-	SectionTypeBean type;
+	TreeTypeBean type;
 
 	@NotEmpty
 	String title;
@@ -19,10 +19,10 @@ public class Section {
 	Integer width;
 	Integer height;
 
-	public Section() {
+	public Tree() {
 	}
 
-	public Section(Long id, SectionTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
+	public Tree(Long id, TreeTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
 		this.id = id;
 		this.type = type;
@@ -33,9 +33,9 @@ public class Section {
 		this.height = height;
 	}
 
-	public Section(SectionDTO dto) {
+	public Tree(TreeDTO dto) {
 		this.id = dto.id;
-		this.type = new SectionTypeBean().getByName(dto.getType());
+		this.type = new TreeTypeBean().getByName(dto.getType());
 		this.title = dto.title;
 		this.hint = dto.hint;
 		this.description = dto.description;
@@ -51,11 +51,11 @@ public class Section {
 		this.id = id;
 	}
 
-	public SectionTypeBean getType() {
+	public TreeTypeBean getType() {
 		return type;
 	}
 
-	public void setType(SectionTypeBean type) {
+	public void setType(TreeTypeBean type) {
 		this.type = type;
 	}
 
@@ -101,7 +101,7 @@ public class Section {
 
 	@Override
 	public String toString() {
-		return "SectionDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+		return "TreeDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
 				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 

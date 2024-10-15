@@ -1,11 +1,11 @@
 package com.sl.api.admin.type;
 
-public enum SectionType {
+public enum TreeType {
 	DIV(10), VERTICAL_LAYOUT(20), HORIZONTAL_LAYOUT(30);
 
     private int value;
 
-    SectionType(int value) {
+    TreeType(int value) {
         this.value = value;
     }
     

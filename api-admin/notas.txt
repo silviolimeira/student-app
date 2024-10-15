@@ -1,7 +1,7 @@
 curl -H 'Content-Type: application/json' \
       -d '{ "type": "DIV", "title":"Title", "hint":"hint", "description":"description"}' \
       -X POST \
-      http://localhost:8091/v1/sections
+      http://localhost:8091/v1/trees
       
       	Long id;
 	Integer type;

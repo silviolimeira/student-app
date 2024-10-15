@@ -15,28 +15,28 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClient.ResponseSpec;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sl.admin.model.Section;
-import com.sl.admin.model.SectionDTO;
+import com.sl.admin.model.Tree;
+import com.sl.admin.model.TreeDTO;
 
 @Service
-public class SectionService {
+public class TreeService {
 
-	private static final Logger logger = LogManager.getLogger(SectionService.class);
+	private static final Logger logger = LogManager.getLogger(TreeService.class);
 
 	private RestClient restClient;
 
-	public SectionService(RestClient.Builder builder) {
+	public TreeService(RestClient.Builder builder) {
 		this.restClient = builder.baseUrl("http://localhost:8091").build();
 	}
 
-	public List<Section> findAll() {
-	    var dots = Arrays.asList(restClient.get().uri("/v1/sections").retrieve().body(SectionDTO[].class));
-	    return dots.stream().map(d -> new Section(d)).collect(Collectors.toList());
+	public List<Tree> findAll() {
+	    var dots = Arrays.asList(restClient.get().uri("/v1/trees").retrieve().body(TreeDTO[].class));
+	    return dots.stream().map(d -> new Tree(d)).collect(Collectors.toList());
 	}
 
-	public void save(Section section) {
-        SectionDTO dto = new SectionDTO(section);
-		ResponseEntity<Void> response = restClient.post().uri("/v1/sections")
+	public void save(Tree tree) {
+        TreeDTO dto = new TreeDTO(tree);
+		ResponseEntity<Void> response = restClient.post().uri("/v1/trees")
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(dto)
 				.retrieve()

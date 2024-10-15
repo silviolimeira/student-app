@@ -1,11 +1,10 @@
 package com.sl.api.admin.model;
 
-import com.sl.api.admin.entity.Section;
-import com.sl.api.admin.type.SectionType;
+import com.sl.api.admin.entity.Tree;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class SectionDTO {
+public class TreeDTO {
 
 	Long id;
 	String type;
@@ -20,20 +19,20 @@ public class SectionDTO {
 	Integer width;
 	Integer height;
 
-	public SectionDTO() {
+	public TreeDTO() {
 	}
 
-	public SectionDTO(Section section) {
-		this.id = section.getId();
-		this.type = new SectionTypeBean().getById(section.getType()).getName();
-		this.title = section.getTitle();
-		this.hint = section.getHint();
-		this.description = section.getDescription();
-		this.width = section.getWidth();
-		this.height = section.getHeight();
+	public TreeDTO(Tree tree) {
+		this.id = tree.getId();
+		this.type = new TreeTypeBean().getById(tree.getType()).getName();
+		this.title = tree.getTitle();
+		this.hint = tree.getHint();
+		this.description = tree.getDescription();
+		this.width = tree.getWidth();
+		this.height = tree.getHeight();
 	}
 	
-	public SectionDTO(Long id, SectionTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
+	public TreeDTO(Long id, TreeTypeBean type, @NotEmpty String title, String hint, String description, Integer width,
 			Integer height) {
 		this.id = id;
 		this.type = type.getName();

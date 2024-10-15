@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public enum SectionType {
+public enum TreeType {
 	DIV(10), VERTICAL_LAYOUT(20), HORIZONTAL_LAYOUT(30);
 
     private int value;
 //    private static Map<Object, Object> map = new HashMap<>();
 
-    SectionType(int value) {
+    TreeType(int value) {
         this.value = value;
     }
     

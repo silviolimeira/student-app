@@ -1,20 +1,23 @@
 package com.sl.api.admin.entity;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SL_COMPONENT")
-public class Component {
+@Table(name = "SL_BRANCH")
+public class Branch {
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
+	Long branchId;
 
 	Integer type;
 	String title;
@@ -22,13 +25,12 @@ public class Component {
 	String description;
 	Integer width;
 	Integer height;
+	
+	@ManyToOne
+	@JoinColumn(name = "treeId")
+	private Tree tree;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public Branch() {
 	}
 
 	public Integer getType() {
@@ -79,9 +81,17 @@ public class Component {
 		this.height = height;
 	}
 
+	public Long getId() {
+		return branchId;
+	}
+
+	public void setId(Long id) {
+		this.branchId = id;
+	}
+
 	@Override
 	public String toString() {
-		return "Component [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+		return "Branch [id=" + branchId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
 				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 
