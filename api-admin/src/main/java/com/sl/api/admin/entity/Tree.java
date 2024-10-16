@@ -1,14 +1,10 @@
 package com.sl.api.admin.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 import com.sl.api.admin.model.TreeDTO;
 import com.sl.api.admin.model.TreeTypeBean;
-import com.sl.api.admin.type.TreeType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,10 +31,10 @@ public class Tree {
 	Integer height;
 	
 	@OneToMany(mappedBy = "tree")
-	Set<Branch> branchs;
+	List<Branch> brancs;
 
 	public Tree() {
-		this.branchs = new HashSet<>();
+		this.brancs = new ArrayList<>();
 	}
 	
 	public Tree(TreeDTO dto) {
@@ -50,12 +46,12 @@ public class Tree {
 		this.width = dto.getWidth();
 		this.height = dto.getHeight();
 	}
-	public void addBranch(Branch branch) {
-		this.branchs.add(branch);
+	public void addGroup(Branch branch) {
+		this.brancs.add(branch);
 	}
 	
-	public Set<Branch> getBranchs() {
-		return branchs;
+	public List<Branch> getGroups() {
+		return brancs;
 	}
 
 	public Integer getType() {
@@ -112,6 +108,12 @@ public class Tree {
 
 	public void setId(Long id) {
 		this.treeId = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Tree [treeId=" + treeId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 
 }

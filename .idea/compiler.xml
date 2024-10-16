@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="student-inheritance" />
+        <module name="admin" />
+        <module name="student-utils" />
+        <module name="student-jpa" />
+        <module name="student-query" />
+        <module name="api-admin" />
+        <module name="student-many-to-many" />
+        <module name="student-many-to-one" />
+        <module name="student-listeners" />
+        <module name="bookstore" />
+        <module name="student-excel" />
+        <module name="student-ui" />
+        <module name="spring-1" />
+        <module name="student-one-to-one" />
+        <module name="student-spring" />
+        <module name="api" />
+        <module name="front" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="admin" options="-parameters" />
+      <module name="api" options="-parameters" />
+      <module name="api-admin" options="-parameters" />
+      <module name="bookstore" options="-parameters" />
+      <module name="front" options="-parameters" />
+      <module name="spring-1" options="-parameters" />
+    </option>
+  </component>
+</project>

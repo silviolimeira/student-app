@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.sl.api.admin.type.TreeType;
 
+
+
 public class TreeTypeBean {
 
 	List<TreeTypeBean> list;
@@ -15,8 +17,8 @@ public class TreeTypeBean {
 	public TreeTypeBean() {
 		list = new ArrayList<>();
 		
-		for (TreeType t : TreeType.values()) { 
-		    list.add(new TreeTypeBean(t.getValue(), t.getName())); 
+		for (TreeType t : TreeType.values()) {
+		    list.add(new TreeTypeBean(t.getValue(), t.getName()));
 		}
 	}
 	
@@ -46,14 +48,14 @@ public class TreeTypeBean {
 	}
 	
 	public TreeTypeBean getById(int id) {
-		for (TreeTypeBean t : list) { 
+		for (TreeTypeBean t : list) {
 		    if (t.getId() == id) return t; 
 		}
 		return null;
 	}
 	
 	public TreeTypeBean getByName(String name) {
-		for (TreeTypeBean t : list) { 
+		for (TreeTypeBean t : list) {
 		    if (t.getName().equalsIgnoreCase(name)) return t; 
 		}
 		return null;

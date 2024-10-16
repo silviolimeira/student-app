@@ -89,4 +89,10 @@ public class Branch {
 		this.branchId = id;
 	}
 
+	@Override
+	public String toString() {
+		return "Branch [id=" + branchId + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+				+ description + ", width=" + width + ", height=" + height + "]";
+	}
+
 }

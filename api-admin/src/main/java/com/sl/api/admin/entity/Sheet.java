@@ -79,4 +79,10 @@ public class Sheet {
 		this.height = height;
 	}
 
+	@Override
+	public String toString() {
+		return "Sheet [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+				+ description + ", width=" + width + ", height=" + height + "]";
+	}
+
 }

@@ -1,7 +1,6 @@
 package com.sl.api.admin.model;
 
 import com.sl.api.admin.entity.Tree;
-import com.sl.api.admin.type.TreeType;
 
 import jakarta.validation.constraints.NotEmpty;
 
@@ -98,6 +97,12 @@ public class TreeDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "SectionDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 
 }

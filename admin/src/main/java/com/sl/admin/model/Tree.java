@@ -4,7 +4,7 @@ import com.sl.admin.type.TreeTypeBean;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class Tree implements EntityDomain {
+public class Tree {
 
 	Long id;
 	TreeTypeBean type;
@@ -18,11 +18,6 @@ public class Tree implements EntityDomain {
 
 	Integer width;
 	Integer height;
-	
-	@Override
-	public String[] getColumns() {
-		return new String[]{"id", "type", "hint", "description", "width", "height"};
-	}
 
 	public Tree() {
 	}
@@ -104,5 +99,10 @@ public class Tree implements EntityDomain {
 		this.description = description;
 	}
 
+	@Override
+	public String toString() {
+		return "TreeDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+				+ description + ", width=" + width + ", height=" + height + "]";
+	}
 
 }

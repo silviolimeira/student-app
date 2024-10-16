@@ -1,7 +1,8 @@
 package com.sl.admin.model;
 
-import com.sl.api.admin.type.TreeType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.sl.admin.type.TreeType;
 import jakarta.validation.constraints.NotEmpty;
 
 public class TreeDTO {
@@ -36,7 +37,7 @@ public class TreeDTO {
 	}
 	
 	public TreeDTO(Long id, TreeType type, @NotEmpty String title, String hint, String description, Integer width,
-			Integer height) {
+				   Integer height) {
 		this.id = id;
 		this.type = type.getName();
 		this.title = title;
@@ -100,6 +101,12 @@ public class TreeDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "TreeDTO [id=" + id + ", type=" + type + ", title=" + title + ", hint=" + hint + ", description="
+				+ description + ", width=" + width + ", height=" + height + "]";
 	}
 
 }
