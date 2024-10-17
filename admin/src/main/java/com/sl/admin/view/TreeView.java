@@ -111,7 +111,7 @@ public class TreeView extends VerticalLayout {
 		TreeTypeBean stb = new TreeTypeBean();
 		type = new ComboBox<TreeTypeBean>("Type");
 		type.setItems(stb.names());
-		type.setItemLabelGenerator(TreeTypeBean::getName);
+		type.setItemLabelGenerator(TreeTypeBean::getTitle);
 
 		title = new TextField("Title");
 		hint = new TextField("Hint");
