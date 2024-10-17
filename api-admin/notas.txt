@@ -3,6 +3,16 @@ curl -H 'Content-Type: application/json' \
       -X POST \
       http://localhost:8091/v1/trees
       
+      
+Swagger Refs:
+{P S L} - Spring Boot 3.0 + Swagger
+ref: https://www.youtube.com/watch?v=Qj-XYeehpz8
+
+Como documentar APIs com Swagger OpenAPI. Código Java com Spring Boot. Tutorial completo!
+ref: https://www.youtube.com/watch?v=wtYAqS1GcHE
+    
+How to document SpringBoot Rest APIs using Open API and Swagger? | SpringBoot Tutorial Part 3
+ref: https://www.youtube.com/watch?v=1Vmi_5ZsyqE&list=PL12XW6i6zqKu7LHeqV-9t8EJ8XAG4JNNF      
       	Long id;
 	Integer type;
 
