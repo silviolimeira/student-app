@@ -37,14 +37,14 @@ public class Tree {
 		this.brancs = new ArrayList<>();
 	}
 	
-	public Tree(TreeDTO dto) {
-		this.treeId = dto.getId();
-		this.type = new TreeTypeBean().getByName(dto.getType()).getId();
-		this.title = dto.getTitle();
-		this.hint = dto.getHint();
-		this.description = dto.getDescription();
-		this.width = dto.getWidth();
-		this.height = dto.getHeight();
+	public <T> Tree(T dto) {
+		this.treeId = ((TreeDTO) dto).getId();
+		this.type = new TreeTypeBean().getByName(((TreeDTO) dto).getType()).getId();
+		this.title = ((TreeDTO) dto).getTitle();
+		this.hint = ((TreeDTO) dto).getHint();
+		this.description = ((TreeDTO) dto).getDescription();
+		this.width = ((TreeDTO) dto).getWidth();
+		this.height = ((TreeDTO) dto).getHeight();
 	}
 	public void addGroup(Branch branch) {
 		this.brancs.add(branch);

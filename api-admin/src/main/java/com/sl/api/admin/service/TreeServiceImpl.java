@@ -12,7 +12,7 @@ import com.sl.api.admin.model.TreeDTO;
 import com.sl.api.admin.repository.TreeRepository;
 
 @Service
-public class TreeServiceImpl implements AppService {
+public class TreeServiceImpl {
 
 	private static final Logger logger = LogManager.getLogger(TreeServiceImpl.class);
 
@@ -22,7 +22,6 @@ public class TreeServiceImpl implements AppService {
 		this.treeRepository = treeRepository;
 	}
 	
-	@Override
 	public TreeDTO save(TreeDTO dto) {
 		Tree tree = new Tree(dto);
 		logger.info("save={}", dto);
@@ -30,7 +29,6 @@ public class TreeServiceImpl implements AppService {
 		return sec;
 	}
 
-	@Override
 	public List<TreeDTO> findAll() {
 		List<TreeDTO> dtos = new ArrayList<>();
 		List<Tree> trees = treeRepository.findAll();

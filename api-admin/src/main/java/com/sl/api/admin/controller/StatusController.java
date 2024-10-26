@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.sl.api.admin.entity.Tree;
+import com.sl.api.admin.model.StatusDTO;
 import com.sl.api.admin.model.TreeDTO;
-import com.sl.api.admin.repository.TreeCustomRepository;
 import com.sl.api.admin.repository.TreeRepository;
 import com.sl.api.admin.service.AppService;
 import com.sl.api.admin.service.TreeServiceImpl;
@@ -27,43 +26,32 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.websocket.server.PathParam;
 
 @RestController
-@RequestMapping(value = "v1/trees", produces = {"aplication/json"})
-@Tag(name = "trees")
-public class TreeController {
+@RequestMapping(value = "v1/status", produces = {"aplication/json"})
+@Tag(name = "status")
+public class StatusController {
 
-	private static final Logger logger = LogManager.getLogger(TreeController.class);
+	private static final Logger logger = LogManager.getLogger(StatusController.class);
 
-	private TreeServiceImpl treeService;
-	private TreeCustomRepository treeCustomRepository;
+	private AppService statusService;
 
-	public TreeController(TreeServiceImpl treeService, TreeCustomRepository treeCustomRepository) {
-		this.treeService = treeService;
-		this.treeCustomRepository = treeCustomRepository;
+	public StatusController(AppService statusService) {
+		this.statusService = statusService;
 	}
 
 	@GetMapping(produces = "application/json")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Tree register successfully")})
-	public ResponseEntity<List<TreeDTO>> findAll() {
-		return ResponseEntity.ok(treeService.findAll());
+	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Status register successfully")})
+	public ResponseEntity<List<StatusDTO>> findAll() {
+		return ResponseEntity.ok(statusService.findAll());
 	}
-	
-	@GetMapping(value = "/{id}", produces = "application/json")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Tree register successfully")})
-	public ResponseEntity<TreeDTO> getThreeById(@PathVariable String id  ) {
-		Tree tree = treeCustomRepository.customFindMethod(Long.parseLong(id));
-		TreeDTO dto = new TreeDTO(tree);
-		return ResponseEntity.ok(dto);
-	}	
 
 	@Operation(summary = "Save Trees", method = "POST")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Tree register successfully")})
 	@CrossOrigin(origins = "http://localhost:8090")
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TreeDTO> create(@RequestBody TreeDTO dto) {
-		return ResponseEntity.ok(treeService.save(dto));
+	public ResponseEntity<StatusDTO> create(@RequestBody StatusDTO dto) {
+		return ResponseEntity.ok(statusService.save(dto));
 	}
 
 }
