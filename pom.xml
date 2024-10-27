@@ -23,6 +23,7 @@
   	<module>api-admin</module>
   	<module>admin</module>
 	<module>app</module>
+	<module>flow-crm-tutorial</module>
   </modules>
   <build>
     <plugins>
