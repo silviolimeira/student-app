@@ -1,3 +1,9 @@
+Bcrypt-Generator.com
+Encrypt some text. The result shown will be a Bcrypt encrypted hash.
+https://bcrypt-generator.com/#google_vignette
+
+
+
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>

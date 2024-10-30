@@ -142,7 +142,6 @@ public class HomeView extends VerticalLayout {
 
     }
 
-
     private void configureGrid() {
         grid.setSizeFull();
         grid.setColumns("country", "zipCode");

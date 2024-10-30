@@ -2,8 +2,16 @@ curl -H 'Content-Type: application/json' \
       -d '{ "type": "DIV", "title":"Title", "hint":"hint", "description":"description"}' \
       -X POST \
       http://localhost:8091/v1/trees
-      
-      
+
+curl -H 'Content-Type: application/json' \
+      -d '{ "id": null, "code": 1, "name":"Silvio Limeira", "email":"silvio.limeira@gmail.com"}' \
+      -X POST \
+      http://localhost:8091/v1/clients
+
+Verificando portas abertas, comando:
+ sudo netstat -plten |grep java
+ kill -9 16085
+
 Swagger Refs:
 {P S L} - Spring Boot 3.0 + Swagger
 ref: https://www.youtube.com/watch?v=Qj-XYeehpz8

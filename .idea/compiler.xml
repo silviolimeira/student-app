@@ -28,6 +28,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="admin" target="17" />
+      <module name="flowcrmtutorial" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

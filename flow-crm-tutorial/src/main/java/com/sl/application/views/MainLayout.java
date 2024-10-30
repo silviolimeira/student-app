@@ -1,6 +1,7 @@
 package com.sl.application.views;
 
 import com.sl.application.security.SecurityService;
+import com.sl.application.views.client.ListClientView;
 import com.sl.application.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -46,7 +47,8 @@ public class MainLayout extends AppLayout {
     private void createDrawer() {
         addToDrawer(new VerticalLayout(
                 new RouterLink("List", ListView.class),
-                new RouterLink("Dashboard", DashboardView.class)
+                new RouterLink("Dashboard", DashboardView.class),
+                new RouterLink("Clientes", ListClientView.class)
         ));
     }
 }
