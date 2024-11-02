@@ -3,6 +3,7 @@ package com.sl.application.views.client;
 import com.sl.application.model.Client;
 import com.sl.application.services.ClientService;
 import com.sl.application.views.MainLayout;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -11,12 +12,18 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @SpringComponent
 @Scope("prototype")
@@ -24,13 +31,15 @@ import org.springframework.context.annotation.Scope;
 @Route(value = "/clients", layout = MainLayout.class)
 @PageTitle("Clientes | CRM")
 public class ListClientView extends VerticalLayout {
-    public Grid<Client> grid = new Grid<Client>(Client.class);
+    List<Client> clients;
+    public Grid<Client> grid = new Grid<>();
     TextField filterText = new TextField();
     //ClientForm form;
     ClientService service;
 
     public ListClientView(ClientService service) {
         this.service = service;
+        clients = new ArrayList<>();
         addClassName("list-view");
         setSizeFull();
         configureGrid();
@@ -77,14 +86,12 @@ public class ListClientView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassNames("contact-grid");
         grid.setSizeFull();
-//        grid.addColumn(Client::getId).setHeader("id");
-//        grid.addColumn(Client::getCode).setHeader("Código");
-//        grid.addColumn(Client::getFullName).setHeader("Nome");
-//        grid.addColumn(Client::getEmail).setHeader("email");
-//        grid.getColumns().forEach(col -> col.setAutoWidth(true));
-
-        grid.asSingleSelect().addValueChangeListener(event ->
-            edit(event.getValue()));
+        // First example uses a Data Transfer Object (DTO) class that we've created. The
+        // Vaadin Grid works well with entity classes, so this is quite straightforward:
+        grid = new Grid<Client>(Client.class);
+        // Button for fetching all entities and showing them
+        //grid.setItems(getAllClients());
+        startFetch();
     }
 
     private Component getToolbar() {
@@ -95,9 +102,19 @@ public class ListClientView extends VerticalLayout {
 
         grid.setEnabled(false);
         Button addContactButton = new Button("Add contact");
-        addContactButton.addClickListener(click -> startFetch());
+        addContactButton.addClickListener(click -> {
+            startFetch();
+        });
+        Button refreshContactButton = new Button("Refresh contact");
+        refreshContactButton.addClickListener(click -> {
+            grid.setItems(clients);
+        });
+        final Button fetchAllClients = new Button("Fetch all comments",
+                e -> grid.setItems(getAllClients()));
 
-        var toolbar = new HorizontalLayout(filterText, addContactButton);
+
+
+        var toolbar = new HorizontalLayout(filterText, addContactButton, refreshContactButton, fetchAllClients);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
@@ -121,29 +138,109 @@ public class ListClientView extends VerticalLayout {
     private void addContact() {
 //        editContact(new Contact());
 //        startFetch();
-        final UI ui = getUI().get();
+        //final UI ui = getUI().get();
+        //service.getAllClients(result -> grid.setItems(result));
+        /*
         service.getAllClients(result -> {
             ui.access(() -> {
                 grid.setEnabled(true);
                 grid.setItems(result);
-                //grid.getDataProvider().refreshAll();
+                grid.setItems()
+                grid.getDataProvider().refreshAll();
             });
         });
+        */
 
     }
 
-    private void startFetch() {
-        final UI ui = getUI().get();
-        service.getAllClients(result -> {
-            ui.access(() -> {
-                grid.setEnabled(true);
-                grid.setItems(result);
-                //grid.getDataProvider().refreshAll();
+    private void startFetch1() {
+//        getUI().ifPresent(ui -> {
+//            service.getAllClients(result -> {
+//                System.out.println(result.stream().toList());
+//                ui.access(() -> {
+//                    grid.setItems(result.stream().toList());
+//                    grid.setDataProvider(grid.getDataProvider());
+//                    grid.getDataProvider().refreshAll();
+//                    //System.out.println(result.stream().toList());
+//                });
+//            });
+//        });
+        remove(grid);
+        grid = new Grid<Client>(Client.class);
+        System.out.println("Setting up fetching all Comment objects through REST..");
+            WebClient.RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
+            spec.retrieve().toEntityList(Client.class).subscribe(result -> {
+                clients.addAll(result.getBody().stream().toList());
+//                getUI().ifPresent(ui -> {
+//                    ui.access(() -> {
+//                        grid.setItems(clients);
+//                        grid.getDataProvider().refreshAll();
+//                    });
+//                });
+                System.out.println(clients);
             });
-        });
+//        getUI().ifPresent(ui -> {
+//            ui.access(() -> {
+//                grid.setItems(clients);
+//                grid.getDataProvider().refreshAll();
+//            });
+//        });
+
     }
 
     private void updateList() {
         //grid.setItems(service.getAllClients());
     }
+
+    private void startFetch() {
+
+        // Calling the service to start the op. The callback e provide is called when
+        // the results are available.
+        getAllClientsAsync(result -> {
+
+            // We now have the results. But, because this call might happen outside normal
+            // Vaadin calls, we need to make sure the HTTP Session data of this app isn't
+            // violated. For this we use UI#access()
+            getUI().ifPresent(ui -> {
+                ui.access(() -> {
+                    // Finally, we can modify the UI state. These changes are sent to the users
+                    // browser immediately, because we have enable Websocket Server Push (@Push
+                    // annotation in MainLayout).
+                    grid.setItems(result);
+                });
+            });
+        });
+    }
+
+
+    public List<Client> getAllClients() {
+        System.out.println("Fetching all commend objects through REST...");
+
+        // Fetch from 3rd party API; configure fetch
+        WebClient.RequestHeadersSpec<?> spec = WebClient.create()
+                .get().uri("http://localhost:8091/v1/clients");
+        // do fetch and map result
+        List<Client> clients = spec.retrieve().toEntityList(Client.class).block().getBody();
+
+        System.out.println(String.format("... received %d items.", clients.size()));
+
+        return clients;
+    }
+
+    public void getAllClientsAsync(ClientService.AsyncRestCallback<List<Client>> callback) {
+        // Configure fetch as normal
+        WebClient.RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
+
+        // But instead of 'block', do 'subscribe'. This means the fetch will run on a
+        // separate thread and notify us when it's ready by calling our lambda operation.
+        spec.retrieve().toEntityList(Client.class).subscribe(result -> {
+
+            // get results as usual
+            final List<Client> clients = result.getBody();
+
+            // call the ui with the data
+            callback.operationFinished(clients);
+        });
+    }
+
 }

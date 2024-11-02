@@ -1,5 +1,6 @@
 package com.sl.application.views;
 
+import com.sl.application.model.Client;
 import com.sl.application.security.SecurityService;
 import com.sl.application.views.client.ListClientView;
 import com.sl.application.views.list.ListView;
@@ -12,6 +13,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainLayout extends AppLayout {
     private final SecurityService securityService;

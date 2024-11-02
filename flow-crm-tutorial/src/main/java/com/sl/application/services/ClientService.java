@@ -31,7 +31,7 @@ public class ClientService implements Serializable {
      * Returns parsed {@link Client} objects from the REST service,
      * asynchronously.
      */
-    public void getAllClients(AsyncRestCallback<List<Client>> callback) {
+    public void getAllClients1(AsyncRestCallback<List<Client>> callback) {
 
         System.out.println("Setting up fetching all Comment objects through REST..");
 
@@ -55,5 +55,14 @@ public class ClientService implements Serializable {
         });
 
     }
+
+    public void getAllClients11(AsyncRestCallback<List<Client>> callback) {
+        System.out.println("Setting up fetching all Comment objects through REST..");
+        RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
+        spec.retrieve().toEntityList(Client.class).subscribe(result -> {
+            callback.operationFinished(result.getBody());
+        });
+    }
+
 
 }
