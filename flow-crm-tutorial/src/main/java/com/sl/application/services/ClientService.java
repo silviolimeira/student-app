@@ -27,42 +27,40 @@ public class ClientService implements Serializable {
         void operationFinished(T results);
     }
 
+    public List<Client> getAllClients() {
+        System.out.println("Fetching all commend objects through REST...");
+
+        // Fetch from 3rd party API; configure fetch
+        WebClient.RequestHeadersSpec<?> spec = WebClient.create()
+                .get().uri("http://localhost:8091/v1/clients");
+        // do fetch and map result
+        List<Client> clients = spec.retrieve().toEntityList(Client.class).block().getBody();
+
+        System.out.println(String.format("... received %d items.", clients.size()));
+
+        return clients;
+    }
+
     /**
      * Returns parsed {@link Client} objects from the REST service,
      * asynchronously.
      */
-    public void getAllClients1(AsyncRestCallback<List<Client>> callback) {
-
-        System.out.println("Setting up fetching all Comment objects through REST..");
-
+    public void getAllClientsAsync(ClientService.AsyncRestCallback<List<Client>> callback) {
         // Configure fetch as normal
-        RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
+        WebClient.RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
 
         // But instead of 'block', do 'subscribe'. This means the fetch will run on a
-        // separate thread and notify us when it's ready by calling our lambda
-        // operation.
+        // separate thread and notify us when it's ready by calling our lambda operation.
         spec.retrieve().toEntityList(Client.class).subscribe(result -> {
-
-            // This code block is run whenever the results are back
 
             // get results as usual
             final List<Client> clients = result.getBody();
 
-            //System.out.println(String.format("...received %d items.", clients.size()));
-
             // call the ui with the data
             callback.operationFinished(clients);
         });
-
     }
 
-    public void getAllClients11(AsyncRestCallback<List<Client>> callback) {
-        System.out.println("Setting up fetching all Comment objects through REST..");
-        RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
-        spec.retrieve().toEntityList(Client.class).subscribe(result -> {
-            callback.operationFinished(result.getBody());
-        });
-    }
 
 
 }

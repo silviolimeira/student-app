@@ -46,7 +46,7 @@ public class ListClientView extends VerticalLayout {
         //configureForm();
 
         add(getToolbar(), getContent());
-        updateList();
+        //updateList();
         closeEditor();
     }
 
@@ -110,12 +110,12 @@ public class ListClientView extends VerticalLayout {
             grid.setItems(clients);
         });
         final Button fetchAllClients = new Button("Fetch all comments",
-                e -> grid.setItems(getAllClients()));
-
-
+            e -> grid.setItems(service.getAllClients())
+        );
 
         var toolbar = new HorizontalLayout(filterText, addContactButton, refreshContactButton, fetchAllClients);
         toolbar.addClassName("toolbar");
+
         return toolbar;
     }
 
@@ -153,50 +153,15 @@ public class ListClientView extends VerticalLayout {
 
     }
 
-    private void startFetch1() {
-//        getUI().ifPresent(ui -> {
-//            service.getAllClients(result -> {
-//                System.out.println(result.stream().toList());
-//                ui.access(() -> {
-//                    grid.setItems(result.stream().toList());
-//                    grid.setDataProvider(grid.getDataProvider());
-//                    grid.getDataProvider().refreshAll();
-//                    //System.out.println(result.stream().toList());
-//                });
-//            });
-//        });
-        remove(grid);
-        grid = new Grid<Client>(Client.class);
-        System.out.println("Setting up fetching all Comment objects through REST..");
-            WebClient.RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
-            spec.retrieve().toEntityList(Client.class).subscribe(result -> {
-                clients.addAll(result.getBody().stream().toList());
-//                getUI().ifPresent(ui -> {
-//                    ui.access(() -> {
-//                        grid.setItems(clients);
-//                        grid.getDataProvider().refreshAll();
-//                    });
-//                });
-                System.out.println(clients);
-            });
-//        getUI().ifPresent(ui -> {
-//            ui.access(() -> {
-//                grid.setItems(clients);
-//                grid.getDataProvider().refreshAll();
-//            });
-//        });
-
-    }
-
     private void updateList() {
-        //grid.setItems(service.getAllClients());
+        grid.setItems(service.getAllClients());
     }
 
     private void startFetch() {
 
         // Calling the service to start the op. The callback e provide is called when
         // the results are available.
-        getAllClientsAsync(result -> {
+        service.getAllClientsAsync(result -> {
 
             // We now have the results. But, because this call might happen outside normal
             // Vaadin calls, we need to make sure the HTTP Session data of this app isn't
@@ -209,37 +174,6 @@ public class ListClientView extends VerticalLayout {
                     grid.setItems(result);
                 });
             });
-        });
-    }
-
-
-    public List<Client> getAllClients() {
-        System.out.println("Fetching all commend objects through REST...");
-
-        // Fetch from 3rd party API; configure fetch
-        WebClient.RequestHeadersSpec<?> spec = WebClient.create()
-                .get().uri("http://localhost:8091/v1/clients");
-        // do fetch and map result
-        List<Client> clients = spec.retrieve().toEntityList(Client.class).block().getBody();
-
-        System.out.println(String.format("... received %d items.", clients.size()));
-
-        return clients;
-    }
-
-    public void getAllClientsAsync(ClientService.AsyncRestCallback<List<Client>> callback) {
-        // Configure fetch as normal
-        WebClient.RequestHeadersSpec<?> spec = WebClient.create().get().uri("http://localhost:8091/v1/clients");
-
-        // But instead of 'block', do 'subscribe'. This means the fetch will run on a
-        // separate thread and notify us when it's ready by calling our lambda operation.
-        spec.retrieve().toEntityList(Client.class).subscribe(result -> {
-
-            // get results as usual
-            final List<Client> clients = result.getBody();
-
-            // call the ui with the data
-            callback.operationFinished(clients);
         });
     }
 
